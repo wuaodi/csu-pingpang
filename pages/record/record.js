@@ -1,198 +1,201 @@
+const autoSync = require('../../utils/autoSync');
+
 Page({
   data: {
-    userInfo: null,
-    allUsers: [],
-    selectedOpponent: null,
-    player1Score: 0,  // 当前用户得分
-    player2Score: 0   // 对手得分
+    players: [],
+    playerNames: [],
+    player1Index: -1,
+    player2Index: -1,
+    player1Name: '',
+    player2Name: '',
+    player1Score: 0,
+    player2Score: 0,
+    canSubmit: false
   },
 
   onLoad() {
-    // 获取用户信息
-    const userInfo = wx.getStorageSync('userInfo');
-    if (!userInfo) {
-      wx.redirectTo({
-        url: '/pages/index/index'
-      });
-      return;
+    this.loadPlayers();
+    this.autoSyncData();
+  },
+
+  onShow() {
+    this.loadPlayers();
+    this.autoSyncData();
+  },
+
+  // 加载选手列表
+  loadPlayers() {
+    const players = wx.getStorageSync('players') || [];
+    const playerNames = players.map(player => player.name);
+    
+    this.setData({ 
+      players,
+      playerNames 
+    });
+  },
+
+  // 选择选手A
+  onPlayer1Change(e) {
+    const index = e.detail.value;
+    const player = this.data.players[index];
+    
+    this.setData({
+      player1Index: index,
+      player1Name: player ? player.name : ''
+    }, () => {
+      this.checkCanSubmit();
+    });
+  },
+
+  // 选择选手B
+  onPlayer2Change(e) {
+    const index = e.detail.value;
+    const player = this.data.players[index];
+    
+    this.setData({
+      player2Index: index,
+      player2Name: player ? player.name : ''
+    }, () => {
+      this.checkCanSubmit();
+    });
+  },
+
+  // 输入分数
+  onScoreInput(e) {
+    const { player } = e.currentTarget.dataset;
+    const score = Math.max(0, parseInt(e.detail.value) || 0);
+    
+    if (player === '1') {
+      this.setData({ player1Score: score });
+    } else if (player === '2') {
+      this.setData({ player2Score: score });
     }
     
-    this.setData({ userInfo });
-    this.loadAllUsers();
+    this.checkCanSubmit();
   },
 
-  // 加载所有用户
-  loadAllUsers() {
-    const db = wx.cloud.database();
-    const currentUserOpenId = '{openid}';
+  // 检查是否可以提交
+  checkCanSubmit() {
+    const { player1Name, player2Name, player1Score, player2Score } = this.data;
     
-    db.collection('users').get().then(res => {
-      // 过滤掉当前用户
-      const allUsers = res.data.filter(user => {
-        return user._openid !== currentUserOpenId;
-      });
-      
-      this.setData({ allUsers });
-    }).catch(err => {
-      console.error('加载用户列表失败', err);
-      wx.showToast({
-        title: '加载用户列表失败',
-        icon: 'none'
-      });
-    });
-  },
-
-  // 选择对手
-  selectOpponent(e) {
-    const opponent = e.currentTarget.dataset.opponent;
-    this.setData({
-      selectedOpponent: opponent,
-      player1Score: 0,
-      player2Score: 0
-    });
-  },
-
-  // 修改分数
-  changeScore(e) {
-    const { player, action } = e.currentTarget.dataset;
-    const scoreKey = player === 'player1' ? 'player1Score' : 'player2Score';
-    let currentScore = this.data[scoreKey];
+    const canSubmit = player1Name && 
+                     player2Name && 
+                     player1Name !== player2Name &&
+                     (player1Score > 0 || player2Score > 0);
     
-    if (action === 'plus') {
-      currentScore++;
-    } else if (action === 'minus' && currentScore > 0) {
-      currentScore--;
-    }
-    
-    this.setData({
-      [scoreKey]: currentScore
-    });
-  },
-
-  // 快速设置比分
-  setQuickScore(e) {
-    const { score1, score2 } = e.currentTarget.dataset;
-    this.setData({
-      player1Score: parseInt(score1),
-      player2Score: parseInt(score2)
-    });
+    this.setData({ canSubmit });
   },
 
   // 提交比分
   submitScore() {
-    const { userInfo, selectedOpponent, player1Score, player2Score } = this.data;
+    const { players, player1Name, player2Name, player1Score, player2Score } = this.data;
     
-    if (!selectedOpponent) {
+    if (!this.data.canSubmit) {
       wx.showToast({
-        title: '请选择对手',
+        title: '请检查选手和分数',
         icon: 'none'
       });
       return;
     }
 
-    if (player1Score === 0 && player2Score === 0) {
-      wx.showToast({
-        title: '请设置比分',
-        icon: 'none'
-      });
-      return;
-    }
+    // 确定获胜者
+    const winner = player1Score > player2Score ? player1Name : 
+                  player2Score > player1Score ? player2Name : null;
 
-    wx.showLoading({
-      title: '保存中...'
-    });
-
-    const db = wx.cloud.database();
-    const isWin = player1Score > player2Score;
-    
-    // 保存比赛记录
-    const gameData = {
+    // 创建比赛记录
+    const gameRecord = {
+      id: Date.now(),
       player1: {
-        openid: '{openid}',
-        nickName: userInfo.nickName,
-        avatarUrl: userInfo.avatarUrl,
+        name: player1Name,
         score: player1Score
       },
       player2: {
-        openid: selectedOpponent._openid,
-        nickName: selectedOpponent.nickName,
-        avatarUrl: selectedOpponent.avatarUrl,
+        name: player2Name,
         score: player2Score
       },
-      winner: isWin ? '{openid}' : selectedOpponent._openid,
-      gameTime: new Date(),
-      createTime: new Date()
+      winner: winner,
+      gameTime: new Date().toISOString(),
+      createTime: new Date().toISOString()
     };
 
-    // 同时更新用户统计数据
-    const updatePromises = [];
-    
     // 保存比赛记录
-    updatePromises.push(
-      db.collection('games').add({
-        data: gameData
-      })
-    );
+    const games = wx.getStorageSync('games') || [];
+    games.unshift(gameRecord);
+    wx.setStorageSync('games', games);
 
-    // 更新当前用户统计
-    updatePromises.push(
-      db.collection('users').where({
-        openid: '{openid}'
-      }).get().then(res => {
-        if (res.data.length > 0) {
-          const userData = res.data[0];
-          const newStats = {
-            totalGames: (userData.totalGames || 0) + 1,
-            wins: userData.wins + (isWin ? 1 : 0),
-            losses: userData.losses + (isWin ? 0 : 1)
-          };
-          
-          return db.collection('users').doc(userData._id).update({
-            data: newStats
-          });
-        }
-      })
-    );
+    // 更新选手统计
+    this.updatePlayerStats(player1Name, player2Name, winner);
 
-    // 更新对手统计
-    updatePromises.push(
-      db.collection('users').doc(selectedOpponent._id).update({
-        data: {
-          totalGames: (selectedOpponent.totalGames || 0) + 1,
-          wins: selectedOpponent.wins + (isWin ? 0 : 1),
-          losses: selectedOpponent.losses + (isWin ? 1 : 0)
-        }
-      })
-    );
+    // 重置表单
+    this.resetForm();
 
-    Promise.all(updatePromises).then(() => {
-      wx.hideLoading();
-      wx.showToast({
-        title: '保存成功!',
-        icon: 'success'
-      });
-      
-      // 重置表单
-      this.setData({
-        selectedOpponent: null,
-        player1Score: 0,
-        player2Score: 0
-      });
-      
-      // 延迟跳转到榜单页面
-      setTimeout(() => {
-        wx.switchTab({
-          url: '/pages/leaderboard/leaderboard'
-        });
-      }, 1500);
-      
-    }).catch(err => {
-      wx.hideLoading();
-      console.error('保存失败', err);
-      wx.showToast({
-        title: '保存失败，请重试',
-        icon: 'none'
-      });
+    // 自动同步到云端
+    this.syncToCloud();
+
+    wx.showToast({
+      title: '比分提交成功',
+      icon: 'success'
     });
+  },
+
+  // 更新选手统计
+  updatePlayerStats(player1Name, player2Name, winner) {
+    const players = [...this.data.players];
+    
+    players.forEach(player => {
+      if (player.name === player1Name || player.name === player2Name) {
+        player.totalGames = (player.totalGames || 0) + 1;
+        
+        if (winner === player.name) {
+          player.wins = (player.wins || 0) + 1;
+        } else if (winner !== null) {
+          player.losses = (player.losses || 0) + 1;
+        }
+      }
+    });
+
+    wx.setStorageSync('players', players);
+    this.setData({ players });
+  },
+
+  // 重置表单
+  resetForm() {
+    this.setData({
+      player1Index: -1,
+      player2Index: -1,
+      player1Name: '',
+      player2Name: '',
+      player1Score: 0,
+      player2Score: 0,
+      canSubmit: false
+    });
+  },
+
+  // 跳转到选手页面
+  goToPlayers() {
+    wx.switchTab({
+      url: '/pages/players/players'
+    });
+  },
+
+  // 自动同步数据到云端
+  async syncToCloud() {
+    try {
+      await autoSync.fullSync();
+    } catch (error) {
+      // 静默处理错误
+    }
+  },
+
+  // 页面进入时自动同步
+  async autoSyncData() {
+    try {
+      const synced = await autoSync.smartSync();
+      if (synced) {
+        this.loadPlayers();
+      }
+    } catch (error) {
+      // 静默处理错误
+    }
   }
 }); 

@@ -1,0 +1,38 @@
+<view class="container">
+  <view class="header">
+    <text class="title">👥 选手管理</text>
+    <button class="add-btn" bindtap="showAddModal">+ 添加选手</button>
+  </view>
+
+  <!-- 选手列表 -->
+  <view class="player-list">
+    <view class="player-item" wx:for="{{players}}" wx:key="id">
+      <view class="player-info">
+        <text class="player-name">{{item.name}}</text>
+        <text class="player-stats">{{item.totalGames}}场 {{item.wins}}胜 {{item.losses}}负 (胜率{{item.winRate}}%)</text>
+      </view>
+      <button class="delete-btn" bindtap="deletePlayer" data-id="{{item.id}}">删除</button>
+    </view>
+    
+    <view class="empty-tip" wx:if="{{players.length === 0}}">
+      <text>还没有选手，点击右上角添加选手</text>
+    </view>
+  </view>
+
+  <!-- 添加选手弹窗 -->
+  <view class="modal" wx:if="{{showModal}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text>添加新选手</text>
+        <button class="close-btn" bindtap="hideAddModal">×</button>
+      </view>
+      <view class="modal-body">
+        <input class="name-input" placeholder="请输入选手姓名" bindinput="onPlayerNameInput" value="{{newPlayerName}}" />
+      </view>
+      <view class="modal-footer">
+        <button class="cancel-btn" bindtap="hideAddModal">取消</button>
+        <button class="confirm-btn" bindtap="addPlayer">确定</button>
+      </view>
+    </view>
+  </view>
+</view> 

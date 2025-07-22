@@ -1,80 +1,65 @@
 <view class="container">
   <view class="header">
-    <text class="title">🏓 比赛记分</text>
+    <text class="title">⚡ 比赛记分</text>
   </view>
 
-  <!-- 选择对手 -->
-  <view class="opponent-section">
-    <text class="section-title">选择对手</text>
-    <view class="opponent-list">
-      <view class="opponent-item {{selectedOpponent._id === item._id ? 'selected' : ''}}" 
-            wx:for="{{allUsers}}" wx:key="_id" bindtap="selectOpponent" data-opponent="{{item}}">
-        <image class="opponent-avatar" src="{{item.avatarUrl}}" mode="aspectFill"></image>
-        <text class="opponent-name">{{item.nickName}}</text>
-      </view>
+  <!-- 选手选择 -->
+  <view class="player-selection">
+    <view class="player-select">
+      <text class="label">选手A:</text>
+      <picker bindchange="onPlayer1Change" value="{{player1Index}}" range="{{playerNames}}">
+        <view class="picker">
+          {{player1Name || '请选择选手A'}}
+        </view>
+      </picker>
+    </view>
+
+    <text class="vs-text">VS</text>
+
+    <view class="player-select">
+      <text class="label">选手B:</text>
+      <picker bindchange="onPlayer2Change" value="{{player2Index}}" range="{{playerNames}}">
+        <view class="picker">
+          {{player2Name || '请选择选手B'}}
+        </view>
+      </picker>
     </view>
   </view>
 
-  <!-- 比分设置 -->
-  <view class="score-section" wx:if="{{selectedOpponent}}">
-    <text class="section-title">设置比分</text>
-    
-    <view class="players">
-      <view class="player">
-        <image class="player-avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
-        <text class="player-name">{{userInfo.nickName}}</text>
-        <text class="vs-text">VS</text>
-      </view>
-      <view class="player">
-        <image class="player-avatar" src="{{selectedOpponent.avatarUrl}}" mode="aspectFill"></image>
-        <text class="player-name">{{selectedOpponent.nickName}}</text>
-      </view>
+  <!-- 比分输入 -->
+  <view class="score-section" wx:if="{{player1Name && player2Name}}">
+    <!-- 选手A分数 -->
+    <view class="player-score-item">
+      <text class="player-label">{{player1Name}}</text>
+      <input class="score-input-large" type="number" placeholder="分数" value="{{player1Score}}" bindinput="onScoreInput" data-player="1" />
     </view>
 
-    <view class="score-input">
-      <view class="score-item">
-        <text class="score-label">我的得分</text>
-        <view class="score-controls">
-          <button class="score-btn" bindtap="changeScore" data-player="player1" data-action="minus">-</button>
-          <text class="score-value">{{player1Score}}</text>
-          <button class="score-btn" bindtap="changeScore" data-player="player1" data-action="plus">+</button>
-        </view>
-      </view>
-      
-      <view class="score-divider">:</view>
-      
-      <view class="score-item">
-        <text class="score-label">对手得分</text>
-        <view class="score-controls">
-          <button class="score-btn" bindtap="changeScore" data-player="player2" data-action="minus">-</button>
-          <text class="score-value">{{player2Score}}</text>
-          <button class="score-btn" bindtap="changeScore" data-player="player2" data-action="plus">+</button>
-        </view>
-      </view>
+    <!-- VS分隔符 -->
+    <view class="vs-separator">
+      <text class="vs-text-large">VS</text>
     </view>
 
-    <!-- 快速设置比分 -->
-    <view class="quick-scores">
-      <text class="quick-title">快速设置</text>
-      <view class="quick-btns">
-        <button class="quick-btn" bindtap="setQuickScore" data-score1="11" data-score2="9">11:9</button>
-        <button class="quick-btn" bindtap="setQuickScore" data-score1="11" data-score2="7">11:7</button>
-        <button class="quick-btn" bindtap="setQuickScore" data-score1="11" data-score2="5">11:5</button>
-        <button class="quick-btn" bindtap="setQuickScore" data-score1="9" data-score2="11">9:11</button>
-        <button class="quick-btn" bindtap="setQuickScore" data-score1="7" data-score2="11">7:11</button>
-        <button class="quick-btn" bindtap="setQuickScore" data-score1="5" data-score2="11">5:11</button>
-      </view>
+    <!-- 选手B分数 -->
+    <view class="player-score-item">
+      <text class="player-label">{{player2Name}}</text>
+      <input class="score-input-large" type="number" placeholder="分数" value="{{player2Score}}" bindinput="onScoreInput" data-player="2" />
     </view>
 
     <!-- 提交按钮 -->
-    <button class="submit-btn" bindtap="submitScore" disabled="{{!selectedOpponent}}">
-      <text>🎯 提交比分</text>
+    <button class="submit-btn" bindtap="submitScore" disabled="{{!canSubmit}}">
+      📝 提交比分
     </button>
   </view>
 
-  <!-- 未选择对手的提示 -->
-  <view class="empty-state" wx:if="{{!selectedOpponent}}">
-    <text class="empty-icon">🤔</text>
-    <text class="empty-text">请先选择一个对手开始比赛</text>
+  <!-- 提示信息 -->
+  <view class="tip" wx:if="{{!player1Name || !player2Name}}">
+    <text>🎯 请先选择两位选手开始比赛</text>
+  </view>
+
+  <!-- 没有选手提示 -->
+  <view class="no-players" wx:if="{{playerNames.length === 0}}">
+    <text>❓ 还没有选手</text>
+    <text>请先到"选手"页面添加选手</text>
+    <button class="go-players-btn" bindtap="goToPlayers">去添加选手</button>
   </view>
 </view> 
