@@ -1,0 +1,19 @@
+# 图标文件说明
+
+由于这是一个演示项目，tabBar中的图标文件需要您自己添加。请在此文件夹中添加以下图标文件：
+
+## 需要的图标文件：
+- home.png (首页图标，未选中状态)
+- home-active.png (首页图标，选中状态)
+- record.png (记分图标，未选中状态)  
+- record-active.png (记分图标，选中状态)
+- rank.png (榜单图标，未选中状态)
+- rank-active.png (榜单图标，选中状态)
+
+## 图标要求：
+- 尺寸：建议 78x78px
+- 格式：PNG格式，支持透明背景
+- 颜色：未选中状态建议使用灰色，选中状态使用蓝色
+
+## 临时解决方案：
+如果暂时没有图标文件，可以在 app.json 中注释掉 tabBar 的 iconPath 和 selectedIconPath 字段，小程序会使用纯文字的 tabBar。 

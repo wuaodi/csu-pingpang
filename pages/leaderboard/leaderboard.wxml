@@ -1,0 +1,87 @@
+<view class="container">
+  <view class="header">
+    <text class="title">🏆 排行榜</text>
+  </view>
+
+  <!-- 切换标签 -->
+  <view class="tabs">
+    <view class="tab {{currentTab === 'ranking' ? 'active' : ''}}" bindtap="switchTab" data-tab="ranking">
+      <text>胜率排行</text>
+    </view>
+    <view class="tab {{currentTab === 'history' ? 'active' : ''}}" bindtap="switchTab" data-tab="history">
+      <text>比赛记录</text>
+    </view>
+  </view>
+
+  <!-- 胜率排行榜 -->
+  <view class="ranking-section" wx:if="{{currentTab === 'ranking'}}">
+    <view class="ranking-list">
+      <view class="ranking-item {{item._openid === userOpenid ? 'highlight' : ''}}" 
+            wx:for="{{userRankings}}" wx:key="_id">
+        <view class="rank-badge rank-{{index + 1}}">
+          <text class="rank-number">{{index + 1}}</text>
+        </view>
+        <image class="user-avatar" src="{{item.avatarUrl}}" mode="aspectFill"></image>
+        <view class="user-info">
+          <text class="user-name">{{item.nickName}}</text>
+          <view class="user-stats">
+            <text class="stat-item">{{item.totalGames || 0}}场</text>
+            <text class="stat-item">{{item.wins || 0}}胜</text>
+            <text class="stat-item">{{item.losses || 0}}负</text>
+          </view>
+        </view>
+        <view class="win-rate">
+          <text class="rate-number">{{item.winRate}}%</text>
+          <text class="rate-label">胜率</text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="empty-state" wx:if="{{userRankings.length === 0}}">
+      <text class="empty-icon">📊</text>
+      <text class="empty-text">暂无排行数据</text>
+    </view>
+  </view>
+
+  <!-- 比赛记录 -->
+  <view class="history-section" wx:if="{{currentTab === 'history'}}">
+    <view class="history-list">
+      <view class="history-item" wx:for="{{gameHistory}}" wx:key="_id">
+        <view class="game-header">
+          <text class="game-time">{{item.timeText}}</text>
+          <view class="game-result {{item.isCurrentUserWin ? 'win' : 'lose'}}">
+            <text>{{item.isCurrentUserWin ? '胜利' : '失败'}}</text>
+          </view>
+        </view>
+        
+        <view class="game-players">
+          <view class="player">
+            <image class="player-avatar" src="{{item.player1.avatarUrl}}" mode="aspectFill"></image>
+            <text class="player-name">{{item.player1.nickName}}</text>
+            <text class="player-score">{{item.player1.score}}</text>
+          </view>
+          
+          <view class="vs-divider">
+            <text>VS</text>
+          </view>
+          
+          <view class="player">
+            <image class="player-avatar" src="{{item.player2.avatarUrl}}" mode="aspectFill"></image>
+            <text class="player-name">{{item.player2.nickName}}</text>
+            <text class="player-score">{{item.player2.score}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    <view class="empty-state" wx:if="{{gameHistory.length === 0}}">
+      <text class="empty-icon">🎮</text>
+      <text class="empty-text">暂无比赛记录</text>
+    </view>
+  </view>
+
+  <!-- 刷新按钮 -->
+  <view class="refresh-btn" bindtap="refreshData">
+    <text>🔄 刷新数据</text>
+  </view>
+</view> 
