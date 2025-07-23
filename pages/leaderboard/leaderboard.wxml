@@ -1,72 +1,108 @@
 <view class="container">
+  <!-- 页面头部 -->
   <view class="header">
     <text class="title">🏆 排行榜</text>
-    <!-- 云端同步状态指示器 -->
-    <view class="sync-indicator">
-      <text class="sync-status">● 已连接</text>
-    </view>
+    <button class="refresh-btn" bindtap="onRefresh" disabled="{{loading}}">
+      刷新
+    </button>
   </view>
 
-  <!-- 统计信息 -->
-  <view class="stats">
-    <text class="stats-text">{{totalPlayers}}位选手 • {{totalGames}}场比赛</text>
+  <!-- 加载状态 -->
+  <view class="loading-container" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">正在同步远程数据...</text>
   </view>
 
-  <!-- 胜率排行榜 -->
-  <view class="ranking-section">
-    <view class="section-title">🏅 胜率排行</view>
-    <view class="ranking-list" wx:if="{{rankings.length > 0}}">
-      <view class="ranking-item" wx:for="{{rankings}}" wx:key="id">
-        <view class="rank-number">{{index + 1}}</view>
-        <view class="player-info">
-          <text class="player-name">{{item.name}}</text>
-          <text class="player-stats">{{item.totalGames}}场 {{item.wins}}胜 {{item.losses}}负</text>
-        </view>
-        <view class="win-rate">{{item.winRate}}%</view>
+  <!-- 主要内容 -->
+  <view class="content" wx:if="{{!loading}}">
+    <!-- 统计信息卡片 -->
+    <view class="stats-card">
+      <view class="stats-item">
+        <text class="stats-number">{{totalPlayers}}</text>
+        <text class="stats-label">选手</text>
+      </view>
+      <view class="stats-divider"></view>
+      <view class="stats-item">
+        <text class="stats-number">{{totalGames}}</text>
+        <text class="stats-label">比赛</text>
+      </view>
+      <view class="stats-divider"></view>
+      <view class="stats-item">
+        <text class="stats-number">☁️</text>
+        <text class="stats-label">远程同步</text>
       </view>
     </view>
-    <view class="empty-tip" wx:else>
-      <text>暂无排行数据</text>
-      <text>记录比赛后将显示排行榜</text>
-    </view>
-  </view>
 
-  <!-- 比赛记录 -->
-  <view class="history-section">
-    <view class="section-title">📋 比赛记录</view>
-    <view class="history-list" wx:if="{{gameHistory.length > 0}}">
-      <view wx:for="{{gameHistory}}" wx:key="id">
-        <!-- 分隔符 -->
-        <view class="history-separator" wx:if="{{item.isSeparator}}">
-          <text class="separator-text">{{item.separatorText}}</text>
-        </view>
-        
-        <!-- 比赛记录 -->
-        <view class="history-item" wx:else>
-          <view class="game-info">
-            <view class="game-players">
-              <text class="player1">{{item.player1.name}}</text>
-              <text class="score">{{item.player1.score}}:{{item.player2.score}}</text>
-              <text class="player2">{{item.player2.name}}</text>
+    <!-- 胜率排行榜 -->
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">🏅 胜率排行</text>
+      </view>
+      <view class="ranking-container">
+        <view class="ranking-list" wx:if="{{rankings.length > 0}}">
+          <view class="ranking-item {{index < 3 ? 'top-three' : ''}}" wx:for="{{rankings}}" wx:key="id" data-rank="{{index + 1}}">
+            <view class="rank-badge rank-{{index + 1}}">{{index + 1}}</view>
+            <view class="player-info">
+              <text class="player-name">{{item.name}}</text>
+              <text class="player-stats">{{item.totalGames}}场 • {{item.wins}}胜{{item.losses}}负</text>
             </view>
-            <view class="game-result">
-              <text class="winner" wx:if="{{!item.isDraw}}">{{item.winner}}获胜</text>
-              <text class="draw" wx:else>平局</text>
-              <text class="game-time">{{item.formattedTime}}</text>
+            <view class="win-rate">{{item.winRate}}%</view>
+          </view>
+        </view>
+        <view class="empty-state" wx:else>
+          <text class="empty-icon">🎯</text>
+          <text class="empty-text">暂无排行数据</text>
+          <text class="empty-hint">记录比赛后将显示排行榜</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 比赛记录 -->
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">📋 比赛记录</text>
+      </view>
+      <view class="history-container">
+        <view class="history-list" wx:if="{{gameHistory.length > 0}}">
+          <view wx:for="{{gameHistory}}" wx:key="id">
+            <!-- 分隔符 -->
+            <view class="history-divider" wx:if="{{item.isSeparator}}">
+              <text class="divider-text">{{item.separatorText}}</text>
+            </view>
+            
+            <!-- 比赛记录 -->
+            <view class="history-item" wx:else>
+              <view class="match-players">
+                <text class="player-name">{{item.player1.name}}</text>
+                <view class="match-score">
+                  <text class="score">{{item.player1.score}}</text>
+                  <text class="vs">:</text>
+                  <text class="score">{{item.player2.score}}</text>
+                </view>
+                <text class="player-name">{{item.player2.name}}</text>
+              </view>
+              <view class="match-info">
+                <text class="match-result" wx:if="{{!item.isDraw}}">{{item.winner}} 胜</text>
+                <text class="match-result draw" wx:else>平局</text>
+                <text class="match-time">{{item.formattedTime}}</text>
+              </view>
             </view>
           </view>
         </view>
+        <view class="empty-state" wx:else>
+          <text class="empty-icon">🎮</text>
+          <text class="empty-text">暂无比赛记录</text>
+          <text class="empty-hint">开始记录比赛吧！</text>
+        </view>
       </view>
     </view>
-    <view class="empty-tip" wx:else>
-      <text>暂无比赛记录</text>
-      <text>开始记录比赛吧！</text>
-    </view>
-  </view>
 
-  <!-- 操作按钮 -->
-  <view class="action-buttons">
-    <button class="action-btn refresh" bindtap="onRefresh">🔄 刷新</button>
-    <button class="action-btn export" bindtap="exportData">📤 导出</button>
+    <!-- 底部操作 -->
+    <view class="bottom-actions">
+      <button class="action-btn export-btn" bindtap="exportData">
+        <text class="btn-icon">📤</text>
+        <text class="btn-text">导出数据</text>
+      </button>
+    </view>
   </view>
 </view> 

@@ -10,27 +10,27 @@ Page({
     player2Name: '',
     player1Score: 0,
     player2Score: 0,
-    canSubmit: false
+    canSubmit: false,
+    loading: false,
+    submitting: false
   },
 
   onLoad() {
-    this.loadPlayers();
-    this.autoSyncData();
+    this.loadPlayersFromLocal();
   },
 
   onShow() {
-    this.loadPlayers();
-    this.autoSyncData();
+    this.loadPlayersFromLocal();
   },
 
-  // 加载选手列表
-  loadPlayers() {
+  // 从本地加载选手列表
+  loadPlayersFromLocal() {
     const players = wx.getStorageSync('players') || [];
     const playerNames = players.map(player => player.name);
     
     this.setData({ 
       players,
-      playerNames 
+      playerNames
     });
   },
 
@@ -86,11 +86,9 @@ Page({
     this.setData({ canSubmit });
   },
 
-  // 提交比分
-  submitScore() {
-    const { players, player1Name, player2Name, player1Score, player2Score } = this.data;
-    
-    if (!this.data.canSubmit) {
+  // 提交比分（直接操作远程）
+  async submitScore() {
+    if (!this.data.canSubmit || this.data.submitting) {
       wx.showToast({
         title: '请检查选手和分数',
         icon: 'none'
@@ -98,64 +96,68 @@ Page({
       return;
     }
 
-    // 确定获胜者
-    const winner = player1Score > player2Score ? player1Name : 
-                  player2Score > player1Score ? player2Name : null;
+    const { player1Name, player2Name, player1Score, player2Score } = this.data;
 
-    // 创建比赛记录
-    const gameRecord = {
-      id: Date.now(),
-      player1: {
-        name: player1Name,
-        score: player1Score
-      },
-      player2: {
-        name: player2Name,
-        score: player2Score
-      },
-      winner: winner,
-      gameTime: new Date().toISOString(),
-      createTime: new Date().toISOString()
-    };
+    try {
+      this.setData({ submitting: true });
 
-    // 保存比赛记录
-    const games = wx.getStorageSync('games') || [];
-    games.unshift(gameRecord);
-    wx.setStorageSync('games', games);
+      // 确定获胜者
+      const winner = player1Score > player2Score ? player1Name : 
+                    player2Score > player1Score ? player2Name : null;
 
-    // 更新选手统计
-    this.updatePlayerStats(player1Name, player2Name, winner);
+      // 创建比赛记录
+      const gameRecord = {
+        id: Date.now(),
+        player1: {
+          name: player1Name,
+          score: player1Score
+        },
+        player2: {
+          name: player2Name,
+          score: player2Score
+        },
+        winner: winner,
+        gameTime: new Date().toISOString(),
+        createTime: new Date().toISOString()
+      };
 
-    // 重置表单
-    this.resetForm();
+      // 直接添加到远程
+      await autoSync.addGame(gameRecord);
 
-    // 自动同步到云端
-    this.syncToCloud();
+      // 重置表单
+      this.resetForm();
+      
+      this.setData({ submitting: false });
 
-    wx.showToast({
-      title: '比分提交成功',
-      icon: 'success'
-    });
-  },
+      wx.showToast({
+        title: '比分提交成功',
+        icon: 'success'
+      });
 
-  // 更新选手统计
-  updatePlayerStats(player1Name, player2Name, winner) {
-    const players = [...this.data.players];
-    
-    players.forEach(player => {
-      if (player.name === player1Name || player.name === player2Name) {
-        player.totalGames = (player.totalGames || 0) + 1;
-        
-        if (winner === player.name) {
-          player.wins = (player.wins || 0) + 1;
-        } else if (winner !== null) {
-          player.losses = (player.losses || 0) + 1;
+      // 重新加载选手数据以获取最新统计
+      this.loadPlayersFromLocal();
+
+    } catch (error) {
+      this.setData({ submitting: false });
+      console.error('提交比分失败:', error);
+      
+      let errorMessage = '提交失败，请重试';
+      if (error.message) {
+        if (error.message.includes('HTTP')) {
+          errorMessage = '网络连接失败，请检查网络';
+        } else if (error.message.includes('timeout')) {
+          errorMessage = '请求超时，请重试';
+        } else {
+          errorMessage = `提交失败：${error.message}`;
         }
       }
-    });
-
-    wx.setStorageSync('players', players);
-    this.setData({ players });
+      
+      wx.showToast({
+        title: errorMessage,
+        icon: 'none',
+        duration: 3000
+      });
+    }
   },
 
   // 重置表单
@@ -176,26 +178,5 @@ Page({
     wx.switchTab({
       url: '/pages/players/players'
     });
-  },
-
-  // 自动同步数据到云端
-  async syncToCloud() {
-    try {
-      await autoSync.fullSync();
-    } catch (error) {
-      // 静默处理错误
-    }
-  },
-
-  // 页面进入时自动同步
-  async autoSyncData() {
-    try {
-      const synced = await autoSync.smartSync();
-      if (synced) {
-        this.loadPlayers();
-      }
-    } catch (error) {
-      // 静默处理错误
-    }
   }
 }); 

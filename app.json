@@ -6,16 +6,16 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#007AFF",
+    "navigationBarBackgroundColor": "#667eea",
     "navigationBarTitleText": "CSU乒乓球",
     "navigationBarTextStyle": "white",
-    "backgroundColor": "#f8f8f8"
+    "backgroundColor": "#667eea"
   },
   "tabBar": {
-    "color": "#666",
-    "selectedColor": "#007AFF",
+    "color": "#999",
+    "selectedColor": "#667eea",
     "backgroundColor": "#ffffff",
-    "borderStyle": "black",
+    "borderStyle": "white",
     "list": [
       {
         "pagePath": "pages/record/record",

@@ -1,161 +1,373 @@
+/* 容器 */
 .container {
-  padding: 20rpx;
-  background: #f5f5f5;
+  padding: 24rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
 }
 
+/* 页面头部 */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30rpx;
-  padding: 0 10rpx;
+  margin-bottom: 32rpx;
+  padding: 0 8rpx;
 }
 
 .title {
-  font-size: 36rpx;
-  font-weight: bold;
-  color: #333;
+  font-size: 40rpx;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2rpx 4rpx rgba(0,0,0,0.2);
 }
 
 .add-btn {
-  background: #007AFF;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10rpx);
+  border: 1rpx solid rgba(255, 255, 255, 0.2);
+  border-radius: 20rpx;
   color: white;
-  font-size: 28rpx;
-  padding: 16rpx 24rpx;
-  border-radius: 8rpx;
-  border: none;
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  padding: 12rpx 20rpx;
+  min-width: 80rpx;
 }
 
-.player-list {
-  background: white;
-  border-radius: 12rpx;
+.add-btn:active {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(0.95);
+}
+
+.add-btn:disabled {
+  opacity: 0.5;
+}
+
+.add-text {
+  font-size: 26rpx;
+  font-weight: 500;
+}
+
+
+
+/* 加载状态 */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 40rpx;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10rpx);
+  border-radius: 24rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.2);
+}
+
+.loading-spinner {
+  width: 60rpx;
+  height: 60rpx;
+  border: 4rpx solid rgba(255, 255, 255, 0.3);
+  border-top: 4rpx solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 24rpx;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  color: white;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+/* 主要内容 */
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.players-section {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20rpx);
+  border-radius: 20rpx;
   overflow: hidden;
+  box-shadow: 0 8rpx 32rpx rgba(0,0,0,0.1);
+}
+
+/* 选手列表 */
+.players-list {
+  padding: 0;
 }
 
 .player-item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 24rpx;
+  justify-content: space-between;
+  padding: 24rpx 32rpx;
   border-bottom: 1rpx solid #f0f0f0;
+  transition: background 0.3s ease;
+  min-height: 80rpx;
 }
 
 .player-item:last-child {
   border-bottom: none;
 }
 
-.player-info {
-  flex: 1;
+.player-item:active {
+  background: #f8f9fa;
 }
 
 .player-name {
-  display: block;
   font-size: 32rpx;
-  font-weight: bold;
+  font-weight: 600;
   color: #333;
-  margin-bottom: 8rpx;
+  flex: 1;
+  margin-right: 20rpx;
 }
 
-.player-stats {
-  font-size: 26rpx;
-  color: #666;
-}
-
+/* 删除按钮 */
 .delete-btn {
-  background: #ff4444;
+  background: #e74c3c;
+  border-radius: 16rpx;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  padding: 8rpx 16rpx;
+  min-width: 72rpx;
+}
+
+.delete-btn:active {
+  background: #c0392b;
+  transform: scale(0.95);
+}
+
+.delete-btn:disabled {
+  opacity: 0.5;
+}
+
+.delete-text {
   color: white;
   font-size: 24rpx;
-  padding: 12rpx 20rpx;
-  border-radius: 6rpx;
-  border: none;
+  font-weight: 500;
 }
 
-.empty-tip {
+
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80rpx 40rpx;
   text-align: center;
-  padding: 80rpx 20rpx;
-  color: #999;
-  font-size: 28rpx;
 }
 
-/* 弹窗样式 */
-.modal {
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 24rpx;
+  opacity: 0.6;
+}
+
+.empty-text {
+  font-size: 32rpx;
+  color: #666;
+  font-weight: 600;
+  margin-bottom: 12rpx;
+}
+
+.empty-hint {
+  font-size: 26rpx;
+  color: #999;
+  line-height: 1.4;
+}
+
+/* 底部操作按钮 */
+.bottom-actions {
+  padding: 32rpx 0 40rpx;
+}
+
+.refresh-action-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  box-shadow: 0 4rpx 16rpx rgba(102,126,234,0.3);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.refresh-action-btn:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 2rpx 8rpx rgba(102,126,234,0.3);
+}
+
+.refresh-action-btn:disabled {
+  opacity: 0.6;
+  transform: none;
+  box-shadow: 0 2rpx 8rpx rgba(102,126,234,0.2);
+}
+
+.refresh-btn-text {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+/* 弹窗遮罩 */
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  right: 0;
+  bottom: 0;
   background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4rpx);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  animation: fadeIn 0.3s ease;
+  padding: 40rpx;
+  box-sizing: border-box;
 }
 
-.modal-content {
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* 弹窗容器 */
+.modal-container {
+  width: 100%;
+  max-width: 520rpx;
   background: white;
-  border-radius: 12rpx;
-  width: 80%;
-  max-width: 500rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 16rpx 48rpx rgba(0,0,0,0.2);
+  animation: slideUp 0.3s ease;
 }
 
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(60rpx);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 弹窗头部 */
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24rpx;
-  border-bottom: 1rpx solid #f0f0f0;
-  font-size: 32rpx;
-  font-weight: bold;
+  padding: 32rpx 32rpx 24rpx;
 }
 
-.close-btn {
-  width: 50rpx;
-  height: 50rpx;
-  border-radius: 25rpx;
-  background: #f0f0f0;
+.modal-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #333;
+}
+
+.modal-close {
+  width: 40rpx;
+  height: 40rpx;
+  background: #f5f5f5;
+  border-radius: 20rpx;
   border: none;
-  font-size: 28rpx;
   color: #666;
+  font-size: 20rpx;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s ease;
 }
 
+.modal-close:active {
+  background: #e5e5e5;
+}
+
+/* 弹窗内容 */
 .modal-body {
-  padding: 24rpx;
+  padding: 0 32rpx 24rpx;
 }
 
-.name-input {
+.input-field {
   width: 100%;
-  height: 80rpx;
-  border: 2rpx solid #ddd;
-  border-radius: 8rpx;
-  padding: 0 20rpx;
-  font-size: 28rpx;
+  padding: 24rpx;
+  background: #f8f9fa;
+  border: 2rpx solid #e9ecef;
+  border-radius: 12rpx;
+  font-size: 32rpx;
+  color: #333;
+  transition: all 0.3s ease;
   box-sizing: border-box;
+  min-height: 88rpx;
 }
 
+.input-field:focus {
+  background: white;
+  border-color: #007aff;
+  box-shadow: 0 0 0 6rpx rgba(0,122,255,0.1);
+  outline: none;
+}
+
+/* 弹窗底部 */
 .modal-footer {
   display: flex;
-  border-top: 1rpx solid #f0f0f0;
+  gap: 16rpx;
+  padding: 0 32rpx 32rpx;
 }
 
-.cancel-btn, .confirm-btn {
+.modal-btn {
   flex: 1;
-  height: 80rpx;
-  border: none;
+  padding: 20rpx;
+  border-radius: 12rpx;
   font-size: 28rpx;
+  font-weight: 600;
+  border: none;
+  transition: all 0.3s ease;
 }
 
-.cancel-btn {
-  background: #f8f8f8;
+.modal-btn.cancel {
+  background: #f8f9fa;
   color: #666;
-  border-radius: 0 0 0 12rpx;
 }
 
-.confirm-btn {
-  background: #007AFF;
+.modal-btn.cancel:active {
+  background: #e9ecef;
+}
+
+.modal-btn.confirm {
+  background: linear-gradient(135deg, #007aff 0%, #5856d6 100%);
   color: white;
-  border-radius: 0 0 12rpx 0;
+  box-shadow: 0 4rpx 16rpx rgba(0,122,255,0.3);
+}
+
+.modal-btn.confirm:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 2rpx 8rpx rgba(0,122,255,0.3);
+}
+
+.modal-btn.confirm:disabled {
+  background: #ccc;
+  color: #999;
+  box-shadow: none;
 } 

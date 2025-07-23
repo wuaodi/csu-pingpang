@@ -5,29 +5,53 @@ Page({
     rankings: [],
     gameHistory: [],
     totalGames: 0,
-    totalPlayers: 0
+    totalPlayers: 0,
+    loading: false
   },
 
   onLoad() {
-    this.loadData();
-    this.autoSyncData();
+    this.loadDataFromLocal();
   },
 
   onShow() {
-    this.loadData();
-    this.autoSyncData();
+    this.loadDataFromLocal();
   },
 
-  // 加载页面数据
-  loadData() {
-    this.loadRankings();
-    this.loadGameHistory();
-  },
-
-  // 加载排行榜数据
-  loadRankings() {
+  // 从本地加载数据
+  loadDataFromLocal() {
     const players = wx.getStorageSync('players') || [];
+    const games = wx.getStorageSync('games') || [];
     
+    this.processRankings(players);
+    this.processGameHistory(games);
+  },
+
+  // 从远程加载页面数据（仅在手动刷新时调用）
+  async loadDataFromRemote() {
+    try {
+      this.setData({ loading: true });
+      
+      // 同时从远程获取选手和比赛数据
+      const [players, games] = await Promise.all([
+        autoSync.loadPlayersFromRemote(),
+        autoSync.loadGamesFromRemote()
+      ]);
+      
+      this.processRankings(players);
+      this.processGameHistory(games);
+      
+      this.setData({ loading: false });
+    } catch (error) {
+      console.error('从远程加载数据失败:', error);
+      this.setData({ loading: false });
+      
+      // 如果远程加载失败，使用本地数据作为备份
+      this.loadDataFromLocal();
+    }
+  },
+
+  // 处理排行榜数据
+  processRankings(players) {
     const rankings = players
       .filter(player => (player.totalGames || 0) > 0)
       .map(player => {
@@ -57,10 +81,8 @@ Page({
     });
   },
 
-  // 加载比赛历史
-  loadGameHistory() {
-    const games = wx.getStorageSync('games') || [];
-    
+  // 处理比赛历史数据
+  processGameHistory(games) {
     if (games.length === 0) {
       this.setData({ 
         gameHistory: [],
@@ -148,48 +170,46 @@ Page({
     });
   },
 
-  // 刷新数据
+  // 刷新数据（直接重新计算统计）
   async onRefresh() {
-    wx.showLoading({ title: '刷新中...' });
-    
     try {
-      const synced = await autoSync.forceSync();
-      this.loadData();
-      wx.hideLoading();
+      wx.showLoading({ title: '刷新中...' });
       
-      if (synced) {
-        wx.showToast({
-          title: '刷新完成，已获取最新数据',
-          icon: 'success',
-          duration: 2000
-        });
-      } else {
-        wx.showToast({
-          title: '刷新完成',
-          icon: 'success'
-        });
-      }
+      // 重新计算选手统计
+      await autoSync.recalculatePlayerStats();
       
-      const stats = autoSync.getApiStats();
-    } catch (error) {
+      // 重新加载数据
+      await this.loadDataFromRemote();
+      
       wx.hideLoading();
       wx.showToast({
-        title: '刷新失败',
+        title: '刷新完成',
+        icon: 'success'
+      });
+    } catch (error) {
+      wx.hideLoading();
+      console.error('刷新失败:', error);
+      wx.showToast({
+        title: '刷新失败，请重试',
         icon: 'none'
       });
     }
   },
 
   // 导出数据
-  exportData() {
+  async exportData() {
     try {
-      const players = wx.getStorageSync('players') || [];
-      const games = wx.getStorageSync('games') || [];
-      const stats = autoSync.getApiStats();
+      wx.showLoading({ title: '导出中...' });
+      
+      // 从远程获取最新数据
+      const [players, games] = await Promise.all([
+        autoSync.loadPlayersFromRemote(),
+        autoSync.loadGamesFromRemote()
+      ]);
       
       let exportText = '🏓 乒乓球比赛数据\n';
       exportText += `导出时间：${new Date().toLocaleString()}\n`;
-      exportText += `API使用: ${stats.requests}/10000 次\n\n`;
+      exportText += `数据来源：远程服务器\n\n`;
       
       exportText += '📊 选手统计\n';
       exportText += '排名\t姓名\t比赛\t胜\t负\t胜率\n';
@@ -209,6 +229,8 @@ Page({
         }
       });
       
+      wx.hideLoading();
+      
       wx.setClipboardData({
         data: exportText,
         success: () => {
@@ -219,31 +241,12 @@ Page({
         }
       });
     } catch (error) {
+      wx.hideLoading();
+      console.error('导出失败:', error);
       wx.showToast({
         title: '导出失败',
         icon: 'none'
       });
-    }
-  },
-
-  // 自动同步数据到云端
-  async syncToCloud() {
-    try {
-      await autoSync.fullSync();
-    } catch (error) {
-      // 静默处理错误
-    }
-  },
-
-  // 页面进入时自动同步
-  async autoSyncData() {
-    try {
-      const synced = await autoSync.smartSync();
-      if (synced) {
-        this.loadData();
-      }
-    } catch (error) {
-      // 静默处理错误
     }
   }
 }); 

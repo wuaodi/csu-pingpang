@@ -1,37 +1,65 @@
 <view class="container">
+  <!-- 页面头部 -->
   <view class="header">
     <text class="title">👥 选手管理</text>
-    <button class="add-btn" bindtap="showAddModal">+ 添加选手</button>
+    <button class="add-btn" bindtap="showAddModal" disabled="{{loading}}">
+      <text class="add-text">新增</text>
+    </button>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-container" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">正在加载...</text>
   </view>
 
   <!-- 选手列表 -->
-  <view class="player-list">
-    <view class="player-item" wx:for="{{players}}" wx:key="id">
-      <view class="player-info">
-        <text class="player-name">{{item.name}}</text>
-        <text class="player-stats">{{item.totalGames}}场 {{item.wins}}胜 {{item.losses}}负 (胜率{{item.winRate}}%)</text>
+  <view class="content" wx:if="{{!loading}}">
+    <view class="players-section">
+      <view class="players-list" wx:if="{{players.length > 0}}">
+        <view class="player-item" wx:for="{{players}}" wx:key="id">
+          <text class="player-name">{{item.name}}</text>
+          <button class="delete-btn" bindtap="deletePlayer" data-id="{{item.id}}" disabled="{{loading}}">
+            <text class="delete-text">删除</text>
+          </button>
+        </view>
       </view>
-      <button class="delete-btn" bindtap="deletePlayer" data-id="{{item.id}}">删除</button>
+      
+      <view class="empty-state" wx:else>
+        <text class="empty-icon">👥</text>
+        <text class="empty-text">还没有选手</text>
+        <text class="empty-hint">点击右上角"新增"添加选手</text>
+      </view>
     </view>
-    
-    <view class="empty-tip" wx:if="{{players.length === 0}}">
-      <text>还没有选手，点击右上角添加选手</text>
+
+    <!-- 底部刷新按钮 -->
+    <view class="bottom-actions">
+      <button class="refresh-action-btn" bindtap="onRefresh" disabled="{{loading}}">
+        <text class="refresh-btn-text">刷新数据</text>
+      </button>
     </view>
   </view>
 
   <!-- 添加选手弹窗 -->
-  <view class="modal" wx:if="{{showModal}}">
-    <view class="modal-content">
+  <view class="modal-overlay" wx:if="{{showModal}}" bindtap="hideAddModal">
+    <view class="modal-container" catchtap="">
       <view class="modal-header">
-        <text>添加新选手</text>
-        <button class="close-btn" bindtap="hideAddModal">×</button>
+        <text class="modal-title">添加新选手</text>
+        <button class="modal-close" bindtap="hideAddModal">✕</button>
       </view>
       <view class="modal-body">
-        <input class="name-input" placeholder="请输入选手姓名" bindinput="onPlayerNameInput" value="{{newPlayerName}}" />
+        <input class="input-field" 
+               placeholder="请输入选手姓名" 
+               bindinput="onPlayerNameInput" 
+               value="{{newPlayerName}}" 
+               focus="{{showModal}}"
+               maxlength="10"
+               confirm-type="done"
+               bindconfirm="addPlayer" />
       </view>
       <view class="modal-footer">
-        <button class="cancel-btn" bindtap="hideAddModal">取消</button>
-        <button class="confirm-btn" bindtap="addPlayer">确定</button>
+        <button class="modal-btn cancel" bindtap="hideAddModal">取消</button>
+        <button class="modal-btn confirm" bindtap="addPlayer" disabled="{{loading}}">确定</button>
       </view>
     </view>
   </view>

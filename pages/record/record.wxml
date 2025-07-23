@@ -3,8 +3,13 @@
     <text class="title">⚡ 比赛记分</text>
   </view>
 
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>正在同步远程数据...</text>
+  </view>
+
   <!-- 选手选择 -->
-  <view class="player-selection">
+  <view class="player-selection" wx:if="{{!loading}}">
     <view class="player-select">
       <text class="label">选手A:</text>
       <picker bindchange="onPlayer1Change" value="{{player1Index}}" range="{{playerNames}}">
@@ -46,8 +51,8 @@
     </view>
 
     <!-- 提交按钮 -->
-    <button class="submit-btn" bindtap="submitScore" disabled="{{!canSubmit}}">
-      📝 提交比分
+    <button class="submit-btn" bindtap="submitScore" disabled="{{!canSubmit || submitting}}">
+      {{submitting ? '📤 提交中...' : '📝 提交比分'}}
     </button>
   </view>
 

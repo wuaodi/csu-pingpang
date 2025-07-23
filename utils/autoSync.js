@@ -1,6 +1,6 @@
 /**
- * JSONBin自动同步工具 - 优化版
- * 智能缓存，减少API调用次数
+ * JSONBin远程同步工具 - 无缓存版本
+ * 所有操作都以远程数据为主，确保数据完全同步
  */
 class AutoSync {
   constructor() {
@@ -9,25 +9,13 @@ class AutoSync {
       playersCollectionId: '687f2e1f7b4b8670d8a5354b',
       gamesCollectionId: '687f2e61f7e7a370d1ebd072',
       apiBase: 'https://api.jsonbin.io/v3/b',
-      syncInterval: 5 * 60 * 1000,
-      cacheExpiry: 2 * 60 * 1000,
-      maxRetries: 2,
-      batchSync: true
+      maxRetries: 3
     };
-    this.isBackground = true;
-    this.cache = new Map();
-    this.pendingSync = false;
   }
 
-  // 获取数据
+  // 直接从远程获取数据，不使用缓存
   async fetchData(collectionId) {
     try {
-      const cacheKey = `fetch_${collectionId}`;
-      const cachedData = this.getCachedData(cacheKey);
-      if (cachedData) {
-        return cachedData;
-      }
-      
       const response = await new Promise((resolve, reject) => {
         wx.request({
           url: `${this.config.apiBase}/${collectionId}/latest`,
@@ -51,25 +39,19 @@ class AutoSync {
           data = Array.isArray(record) ? record : [];
         }
 
-        this.setCachedData(cacheKey, data);
         return data;
       } else {
-        return [];
+        throw new Error(`HTTP ${response.statusCode}`);
       }
     } catch (error) {
-      return [];
+      console.error('获取远程数据失败:', error);
+      throw error;
     }
   }
 
-  // 推送数据
+  // 直接推送数据到远程，不进行数据比较
   async pushData(collectionId, data) {
     try {
-      const cacheKey = `fetch_${collectionId}`;
-      const cachedData = this.getCachedData(cacheKey);
-      if (cachedData && JSON.stringify(cachedData) === JSON.stringify(data)) {
-        return true;
-      }
-      
       const response = await new Promise((resolve, reject) => {
         wx.request({
           url: `${this.config.apiBase}/${collectionId}`,
@@ -85,169 +67,194 @@ class AutoSync {
       });
 
       if (response.statusCode === 200) {
-        this.setCachedData(cacheKey, data);
-        this.updateApiStats();
+        // 同时更新本地存储，仅作为临时缓存
+        if (collectionId === this.config.playersCollectionId) {
+          wx.setStorageSync('players', data);
+        } else if (collectionId === this.config.gamesCollectionId) {
+          wx.setStorageSync('games', data);
+        }
         return true;
+      } else {
+        throw new Error(`HTTP ${response.statusCode}`);
       }
-      return false;
     } catch (error) {
-      return false;
+      console.error('推送数据到远程失败:', error);
+      throw error;
     }
   }
 
-  // 同步选手数据
-  async syncPlayers() {
+  // 获取远程选手数据，更新到本地
+  async loadPlayersFromRemote() {
     try {
-      const localPlayers = wx.getStorageSync('players') || [];
+      const cloudPlayers = await this.fetchData(this.config.playersCollectionId);
+      wx.setStorageSync('players', cloudPlayers);
+      return cloudPlayers;
+    } catch (error) {
+      console.error('从远程加载选手数据失败:', error);
+      return wx.getStorageSync('players') || [];
+    }
+  }
+
+  // 获取远程比赛数据，更新到本地
+  async loadGamesFromRemote() {
+    try {
+      const cloudGames = await this.fetchData(this.config.gamesCollectionId);
+      wx.setStorageSync('games', cloudGames);
+      return cloudGames;
+    } catch (error) {
+      console.error('从远程加载比赛数据失败:', error);
+      return wx.getStorageSync('games') || [];
+    }
+  }
+
+  // 添加选手到远程
+  async addPlayer(playerName) {
+    try {
+      // 先获取远程最新数据
       const cloudPlayers = await this.fetchData(this.config.playersCollectionId);
       
-      const mergedPlayers = this.mergePlayers(localPlayers, cloudPlayers);
-      
-      if (JSON.stringify(localPlayers) !== JSON.stringify(mergedPlayers)) {
-        wx.setStorageSync('players', mergedPlayers);
+      // 检查选手是否已存在
+      const existingPlayer = cloudPlayers.find(p => p.name === playerName);
+      if (existingPlayer) {
+        throw new Error('选手已存在');
       }
+
+      // 创建新选手
+      const newPlayer = {
+        id: Date.now(),
+        name: playerName,
+        totalGames: 0,
+        wins: 0,
+        losses: 0,
+        createTime: new Date().toISOString()
+      };
+
+      // 添加到远程数据
+      const updatedPlayers = [...cloudPlayers, newPlayer];
+      await this.pushData(this.config.playersCollectionId, updatedPlayers);
       
-      if (JSON.stringify(cloudPlayers) !== JSON.stringify(mergedPlayers)) {
-        await this.pushData(this.config.playersCollectionId, mergedPlayers);
-      }
-      
-      return true;
+      return newPlayer;
     } catch (error) {
-      return false;
+      console.error('添加选手失败:', error);
+      throw error;
     }
   }
 
-  // 同步比赛数据
-  async syncGames() {
+  // 删除选手从远程
+  async deletePlayer(playerId) {
     try {
-      const localGames = wx.getStorageSync('games') || [];
+      // 先获取远程最新数据
+      const cloudPlayers = await this.fetchData(this.config.playersCollectionId);
+      
+      // 过滤掉要删除的选手
+      const updatedPlayers = cloudPlayers.filter(p => p.id !== playerId);
+      
+      // 推送到远程
+      await this.pushData(this.config.playersCollectionId, updatedPlayers);
+      
+      return true;
+    } catch (error) {
+      console.error('删除选手失败:', error);
+      throw error;
+    }
+  }
+
+  // 添加比赛记录到远程
+  async addGame(gameRecord) {
+    try {
+      // 先获取远程最新数据
       const cloudGames = await this.fetchData(this.config.gamesCollectionId);
+      const cloudPlayers = await this.fetchData(this.config.playersCollectionId);
       
-      const mergedGames = this.mergeGames(localGames, cloudGames);
+      // 添加比赛记录
+      const updatedGames = [gameRecord, ...cloudGames];
       
-      if (JSON.stringify(localGames) !== JSON.stringify(mergedGames)) {
-        wx.setStorageSync('games', mergedGames);
-      }
+      // 更新选手统计
+      const updatedPlayers = this.updatePlayerStatsForGame(cloudPlayers, gameRecord);
       
-      if (JSON.stringify(cloudGames) !== JSON.stringify(mergedGames)) {
-        await this.pushData(this.config.gamesCollectionId, mergedGames);
-      }
+      // 同时推送比赛和选手数据
+      await Promise.all([
+        this.pushData(this.config.gamesCollectionId, updatedGames),
+        this.pushData(this.config.playersCollectionId, updatedPlayers)
+      ]);
       
       return true;
     } catch (error) {
-      return false;
+      console.error('添加比赛记录失败:', error);
+      throw error;
     }
   }
 
-  // 完整同步
+  // 更新选手统计数据（基于单场比赛）
+  updatePlayerStatsForGame(players, gameRecord) {
+    const { player1, player2, winner } = gameRecord;
+    
+    return players.map(player => {
+      if (player.name === player1.name) {
+        return {
+          ...player,
+          totalGames: (player.totalGames || 0) + 1,
+          wins: (player.wins || 0) + (winner === player1.name ? 1 : 0),
+          losses: (player.losses || 0) + (winner === player2.name ? 1 : 0)
+        };
+      } else if (player.name === player2.name) {
+        return {
+          ...player,
+          totalGames: (player.totalGames || 0) + 1,
+          wins: (player.wins || 0) + (winner === player2.name ? 1 : 0),
+          losses: (player.losses || 0) + (winner === player1.name ? 1 : 0)
+        };
+      }
+      return player;
+    });
+  }
+
+  // 完整同步：从远程加载所有数据
   async fullSync() {
-    if (this.pendingSync) {
-      return false;
-    }
-    
-    this.pendingSync = true;
-    
     try {
-      const playersSuccess = await this.syncPlayers();
-      const gamesSuccess = await this.syncGames();
+      const [cloudPlayers, cloudGames] = await Promise.all([
+        this.fetchData(this.config.playersCollectionId),
+        this.fetchData(this.config.gamesCollectionId)
+      ]);
       
-      const success = playersSuccess && gamesSuccess;
-      this.setLastSync();
-      return success;
-    } finally {
-      this.pendingSync = false;
-    }
-  }
-
-  // 智能同步
-  async smartSync() {
-    if (!this.shouldSync()) {
+      // 直接覆盖本地数据
+      wx.setStorageSync('players', cloudPlayers);
+      wx.setStorageSync('games', cloudGames);
+      
+      return true;
+    } catch (error) {
+      console.error('完整同步失败:', error);
       return false;
     }
-    
-    return await this.fullSync();
   }
 
-  // 强制同步
-  async forceSync() {
-    this.clearCache();
-    return await this.fullSync();
-  }
-
-  // 合并选手数据
-  mergePlayers(local, cloud) {
-    const merged = new Map();
-    
-    [...local, ...cloud].forEach(player => {
-      const existing = merged.get(player.name);
-      if (!existing) {
-        merged.set(player.name, { ...player });
-      } else {
-        merged.set(player.name, {
-          ...existing,
-          totalGames: Math.max(existing.totalGames || 0, player.totalGames || 0),
-          wins: Math.max(existing.wins || 0, player.wins || 0),
-          losses: Math.max(existing.losses || 0, player.losses || 0)
-        });
-      }
-    });
-    
-    return Array.from(merged.values());
-  }
-
-  // 合并比赛数据
-  mergeGames(local, cloud) {
-    const merged = new Map();
-    
-    [...local, ...cloud].forEach(game => {
-      if (!merged.has(game.id)) {
-        merged.set(game.id, game);
-      }
-    });
-    
-    return Array.from(merged.values())
-      .sort((a, b) => new Date(b.gameTime) - new Date(a.gameTime));
-  }
-
-  // 缓存管理
-  getCachedData(key) {
-    const cached = this.cache.get(key);
-    if (cached && Date.now() - cached.timestamp < this.config.cacheExpiry) {
-      return cached.data;
+  // 重新计算所有选手统计数据（基于远程比赛记录）
+  async recalculatePlayerStats() {
+    try {
+      const cloudGames = await this.fetchData(this.config.gamesCollectionId);
+      const cloudPlayers = await this.fetchData(this.config.playersCollectionId);
+      
+      // 重置所有选手统计
+      const resetPlayers = cloudPlayers.map(player => ({
+        ...player,
+        totalGames: 0,
+        wins: 0,
+        losses: 0
+      }));
+      
+      // 基于所有比赛记录重新计算
+      const recalculatedPlayers = cloudGames.reduce((players, game) => {
+        return this.updatePlayerStatsForGame(players, game);
+      }, resetPlayers);
+      
+      // 推送到远程
+      await this.pushData(this.config.playersCollectionId, recalculatedPlayers);
+      
+      return recalculatedPlayers;
+    } catch (error) {
+      console.error('重新计算选手统计失败:', error);
+      throw error;
     }
-    return null;
-  }
-
-  setCachedData(key, data) {
-    this.cache.set(key, {
-      data: data,
-      timestamp: Date.now()
-    });
-  }
-
-  clearCache() {
-    this.cache.clear();
-  }
-
-  // 同步控制
-  shouldSync() {
-    const lastSync = wx.getStorageSync('lastSyncTime') || 0;
-    return Date.now() - lastSync > this.config.syncInterval;
-  }
-
-  setLastSync() {
-    wx.setStorageSync('lastSyncTime', Date.now());
-  }
-
-  // API统计
-  updateApiStats() {
-    const stats = wx.getStorageSync('apiStats') || { requests: 0, lastReset: Date.now() };
-    stats.requests++;
-    wx.setStorageSync('apiStats', stats);
-  }
-
-  getApiStats() {
-    return wx.getStorageSync('apiStats') || { requests: 0, lastReset: Date.now() };
   }
 }
 
