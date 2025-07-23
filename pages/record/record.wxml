@@ -58,7 +58,7 @@
 
   <!-- 提示信息 -->
   <view class="tip" wx:if="{{!player1Name || !player2Name}}">
-    <text>🎯 请先选择两位选手开始比赛</text>
+    <text>请先选择两位选手开始比赛</text>
   </view>
 
   <!-- 没有选手提示 -->

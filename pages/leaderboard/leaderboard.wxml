@@ -1,10 +1,7 @@
-<view class="container">
+<scroll-view class="container" refresher-enabled="{{true}}" refresher-triggered="{{refreshing}}" bindrefresherrefresh="onPullDownRefresh">
   <!-- 页面头部 -->
   <view class="header">
     <text class="title">🏆 排行榜</text>
-    <button class="refresh-btn" bindtap="onRefresh" disabled="{{loading}}">
-      刷新
-    </button>
   </view>
 
   <!-- 加载状态 -->
@@ -31,47 +28,47 @@
         <text class="stats-number">☁️</text>
         <text class="stats-label">远程同步</text>
       </view>
-    </view>
+  </view>
 
-    <!-- 胜率排行榜 -->
+  <!-- 胜率排行榜 -->
     <view class="section">
       <view class="section-header">
         <text class="section-title">🏅 胜率排行</text>
       </view>
       <view class="ranking-container">
-        <view class="ranking-list" wx:if="{{rankings.length > 0}}">
+    <view class="ranking-list" wx:if="{{rankings.length > 0}}">
           <view class="ranking-item {{index < 3 ? 'top-three' : ''}}" wx:for="{{rankings}}" wx:key="id" data-rank="{{index + 1}}">
             <view class="rank-badge rank-{{index + 1}}">{{index + 1}}</view>
-            <view class="player-info">
-              <text class="player-name">{{item.name}}</text>
+        <view class="player-info">
+          <text class="player-name">{{item.name}}</text>
               <text class="player-stats">{{item.totalGames}}场 • {{item.wins}}胜{{item.losses}}负</text>
-            </view>
-            <view class="win-rate">{{item.winRate}}%</view>
-          </view>
         </view>
+        <view class="win-rate">{{item.winRate}}%</view>
+      </view>
+    </view>
         <view class="empty-state" wx:else>
           <text class="empty-icon">🎯</text>
           <text class="empty-text">暂无排行数据</text>
           <text class="empty-hint">记录比赛后将显示排行榜</text>
         </view>
-      </view>
     </view>
+  </view>
 
-    <!-- 比赛记录 -->
+  <!-- 比赛记录 -->
     <view class="section">
       <view class="section-header">
         <text class="section-title">📋 比赛记录</text>
       </view>
       <view class="history-container">
-        <view class="history-list" wx:if="{{gameHistory.length > 0}}">
-          <view wx:for="{{gameHistory}}" wx:key="id">
-            <!-- 分隔符 -->
+    <view class="history-list" wx:if="{{gameHistory.length > 0}}">
+      <view wx:for="{{gameHistory}}" wx:key="id">
+        <!-- 分隔符 -->
             <view class="history-divider" wx:if="{{item.isSeparator}}">
               <text class="divider-text">{{item.separatorText}}</text>
-            </view>
-            
-            <!-- 比赛记录 -->
-            <view class="history-item" wx:else>
+        </view>
+        
+        <!-- 比赛记录 -->
+        <view class="history-item" wx:else>
               <view class="match-players">
                 <text class="player-name">{{item.player1.name}}</text>
                 <view class="match-score">
@@ -85,7 +82,7 @@
                 <text class="match-result" wx:if="{{!item.isDraw}}">{{item.winner}} 胜</text>
                 <text class="match-result draw" wx:else>平局</text>
                 <text class="match-time">{{item.formattedTime}}</text>
-              </view>
+            </view>
             </view>
           </view>
         </view>
@@ -105,4 +102,4 @@
       </button>
     </view>
   </view>
-</view> 
+</scroll-view> 

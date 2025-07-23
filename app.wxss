@@ -2,6 +2,16 @@
 page {
   background-color: #f8f8f8;
   font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* scroll-view重置样式 */
+scroll-view {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* 重置按钮样式 */

@@ -83,19 +83,19 @@ Page({
       // 直接在远程添加选手
       await autoSync.addPlayer(newPlayerName);
 
-      this.setData({
-        showModal: false,
+    this.setData({
+      showModal: false,
         newPlayerName: '',
         loading: false
-      });
+    });
 
       // 重新从远程加载数据
       await this.loadPlayersFromRemote();
 
-      wx.showToast({
-        title: '添加成功',
-        icon: 'success'
-      });
+    wx.showToast({
+      title: '添加成功',
+      icon: 'success'
+    });
     } catch (error) {
       this.setData({ loading: false });
       
@@ -135,14 +135,14 @@ Page({
             await autoSync.deletePlayer(playerId);
             
             this.setData({ loading: false });
-            
+
             // 重新从远程加载数据
             await this.loadPlayersFromRemote();
 
-            wx.showToast({
-              title: '已删除',
-              icon: 'success'
-            });
+          wx.showToast({
+            title: '已删除',
+            icon: 'success'
+          });
           } catch (error) {
             this.setData({ loading: false });
             console.error('删除选手失败:', error);

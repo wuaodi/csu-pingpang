@@ -6,14 +6,17 @@ Page({
     gameHistory: [],
     totalGames: 0,
     totalPlayers: 0,
-    loading: false
+    loading: false,
+    refreshing: false
   },
 
   onLoad() {
-    this.loadDataFromLocal();
+    // 页面首次加载时默认刷新一次
+    this.loadDataFromRemote();
   },
 
   onShow() {
+    // 每次显示页面时从本地加载，保持快速响应
     this.loadDataFromLocal();
   },
 
@@ -170,29 +173,30 @@ Page({
     });
   },
 
-  // 刷新数据（直接重新计算统计）
-  async onRefresh() {
+  // 下拉刷新
+  async onPullDownRefresh() {
+    this.setData({ refreshing: true });
+    
     try {
-      wx.showLoading({ title: '刷新中...' });
-      
       // 重新计算选手统计
       await autoSync.recalculatePlayerStats();
-      
       // 重新加载数据
       await this.loadDataFromRemote();
       
-      wx.hideLoading();
       wx.showToast({
         title: '刷新完成',
-        icon: 'success'
+        icon: 'success',
+        duration: 1500
       });
     } catch (error) {
-      wx.hideLoading();
       console.error('刷新失败:', error);
       wx.showToast({
         title: '刷新失败，请重试',
-        icon: 'none'
+        icon: 'none',
+        duration: 2000
       });
+    } finally {
+      this.setData({ refreshing: false });
     }
   },
 

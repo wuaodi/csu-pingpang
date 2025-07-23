@@ -1,6 +1,6 @@
 /* 容器 */
 .container {
-  padding: 24rpx;
+  padding: 20rpx;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
 }
@@ -109,7 +109,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 24rpx 32rpx;
+  padding: 20rpx 32rpx;
   border-bottom: 1rpx solid #f0f0f0;
   transition: background 0.3s ease;
   min-height: 80rpx;
@@ -311,7 +311,7 @@
 
 .input-field {
   width: 100%;
-  padding: 24rpx;
+  padding: 20rpx;
   background: #f8f9fa;
   border: 2rpx solid #e9ecef;
   border-radius: 12rpx;

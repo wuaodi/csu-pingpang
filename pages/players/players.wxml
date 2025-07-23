@@ -17,8 +17,8 @@
   <view class="content" wx:if="{{!loading}}">
     <view class="players-section">
       <view class="players-list" wx:if="{{players.length > 0}}">
-        <view class="player-item" wx:for="{{players}}" wx:key="id">
-          <text class="player-name">{{item.name}}</text>
+    <view class="player-item" wx:for="{{players}}" wx:key="id">
+        <text class="player-name">{{item.name}}</text>
           <button class="delete-btn" bindtap="deletePlayer" data-id="{{item.id}}" disabled="{{loading}}">
             <text class="delete-text">删除</text>
           </button>
@@ -31,7 +31,7 @@
         <text class="empty-hint">点击右上角"新增"添加选手</text>
       </view>
     </view>
-
+    
     <!-- 底部刷新按钮 -->
     <view class="bottom-actions">
       <button class="refresh-action-btn" bindtap="onRefresh" disabled="{{loading}}">
