@@ -5,9 +5,9 @@
 class AutoSync {
   constructor() {
     this.config = {
-      apiKey: '$2a$10$13DfPR7U04bAFM0NSJ1NTu5dE8lE5ebiFoerD3bHqLV5KtfmjN.Ta',
-      playersCollectionId: '687f2e1f7b4b8670d8a5354b',
-      gamesCollectionId: '687f2e61f7e7a370d1ebd072',
+      apiKey: 'xxxxxxxxxx',
+      playersCollectionId: 'xxxxxxxxxx',
+      gamesCollectionId: 'xxxxxxxxxx',
       apiBase: 'https://api.jsonbin.io/v3/b',
       maxRetries: 3
     };
