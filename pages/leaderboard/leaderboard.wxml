@@ -1,4 +1,4 @@
-<scroll-view class="container" refresher-enabled="{{true}}" refresher-triggered="{{refreshing}}" bindrefresherrefresh="onPullDownRefresh">
+<view class="container">
   <!-- 页面头部 -->
   <view class="header">
     <text class="title">🏆 排行榜</text>
@@ -28,47 +28,62 @@
         <text class="stats-number">☁️</text>
         <text class="stats-label">远程同步</text>
       </view>
-  </view>
+    </view>
 
-  <!-- 胜率排行榜 -->
+    <!-- 胜率排行榜 -->
     <view class="section">
       <view class="section-header">
         <text class="section-title">🏅 胜率排行</text>
+        <!-- 榜单类型切换 -->
+        <view class="ranking-tabs">
+          <text class="tab-item {{rankingType === 'total' ? 'active' : ''}}" bindtap="switchRankingType" data-type="total">总榜单</text>
+          <text class="tab-item {{rankingType === 'daily' ? 'active' : ''}}" bindtap="switchRankingType" data-type="daily">日榜单</text>
+        </view>
+        <!-- 日期选择器 -->
+        <view class="date-selector" wx:if="{{rankingType === 'daily'}}">
+          <picker mode="date" value="{{selectedDate}}" bindchange="onDateChange">
+            <view class="date-picker">
+              <text class="date-text">📅 {{selectedDate}}</text>
+              <text class="picker-arrow">▼</text>
+            </view>
+          </picker>
+        </view>
       </view>
       <view class="ranking-container">
-    <view class="ranking-list" wx:if="{{rankings.length > 0}}">
+        <view class="ranking-list" wx:if="{{rankings.length > 0}}">
           <view class="ranking-item {{index < 3 ? 'top-three' : ''}}" wx:for="{{rankings}}" wx:key="id" data-rank="{{index + 1}}">
             <view class="rank-badge rank-{{index + 1}}">{{index + 1}}</view>
-        <view class="player-info">
-          <text class="player-name">{{item.name}}</text>
+            <view class="player-info">
+              <text class="player-name">{{item.name}}</text>
               <text class="player-stats">{{item.totalGames}}场 • {{item.wins}}胜{{item.losses}}负</text>
+            </view>
+            <view class="win-rate">{{item.winRate}}%</view>
+          </view>
         </view>
-        <view class="win-rate">{{item.winRate}}%</view>
-      </view>
-    </view>
         <view class="empty-state" wx:else>
           <text class="empty-icon">🎯</text>
           <text class="empty-text">暂无排行数据</text>
           <text class="empty-hint">记录比赛后将显示排行榜</text>
         </view>
+      </view>
     </view>
-  </view>
 
-  <!-- 比赛记录 -->
+    <!-- 比赛记录 -->
     <view class="section">
       <view class="section-header">
         <text class="section-title">📋 比赛记录</text>
+        <view class="record-date-info" wx:if="{{rankingType === 'daily'}}">
+          <text class="date-info">{{selectedDate}} 的比赛</text>
+        </view>
+        <view class="record-date-info" wx:else>
+          <text class="date-info">今日比赛</text>
+        </view>
       </view>
       <view class="history-container">
-    <view class="history-list" wx:if="{{gameHistory.length > 0}}">
-      <view wx:for="{{gameHistory}}" wx:key="id">
-        <!-- 分隔符 -->
-            <view class="history-divider" wx:if="{{item.isSeparator}}">
-              <text class="divider-text">{{item.separatorText}}</text>
-        </view>
-        
-        <!-- 比赛记录 -->
-        <view class="history-item" wx:else>
+        <view class="history-list" wx:if="{{gameHistory.length > 0}}">
+          <view wx:for="{{gameHistory}}" wx:key="id">
+            <!-- 比赛记录 -->
+            <view class="history-item">
               <view class="match-players">
                 <text class="player-name">{{item.player1.name}}</text>
                 <view class="match-score">
@@ -82,24 +97,30 @@
                 <text class="match-result" wx:if="{{!item.isDraw}}">{{item.winner}} 胜</text>
                 <text class="match-result draw" wx:else>平局</text>
                 <text class="match-time">{{item.formattedTime}}</text>
-            </view>
+              </view>
             </view>
           </view>
         </view>
         <view class="empty-state" wx:else>
-          <text class="empty-icon">🎮</text>
-          <text class="empty-text">暂无比赛记录</text>
-          <text class="empty-hint">开始记录比赛吧！</text>
+          <text class="empty-icon">📅</text>
+          <text class="empty-text" wx:if="{{rankingType === 'daily'}}">{{selectedDate}} 暂无比赛记录</text>
+          <text class="empty-text" wx:else>今日暂无比赛记录</text>
+          <text class="empty-hint" wx:if="{{rankingType === 'daily'}}">该日期没有进行任何比赛</text>
+          <text class="empty-hint" wx:else>记录比赛后将在这里显示</text>
         </view>
       </view>
     </view>
 
     <!-- 底部操作 -->
     <view class="bottom-actions">
+      <button class="action-btn refresh-btn" bindtap="manualRefresh">
+        <text class="btn-icon">🔄</text>
+        <text class="btn-text">手动刷新</text>
+      </button>
       <button class="action-btn export-btn" bindtap="exportData">
         <text class="btn-icon">📤</text>
         <text class="btn-text">导出数据</text>
       </button>
     </view>
   </view>
-</scroll-view> 
+</view> 

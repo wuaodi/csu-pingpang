@@ -3,10 +3,11 @@
   padding: 20rpx 20rpx 20rpx 20rpx;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
-  height: 100vh;
   box-sizing: border-box;
   width: 100%;
   margin: 0;
+  /* 确保页面可以正常滚动 */
+  overflow: visible;
 }
 
 /* 页面头部 */
@@ -124,6 +125,85 @@
   font-weight: 700;
   color: #333;
   text-align: center;
+  margin-bottom: 24rpx;
+}
+
+/* 榜单类型切换 */
+.ranking-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 8rpx;
+  margin-bottom: 16rpx;
+  background: #f1f3f4;
+  border-radius: 12rpx;
+  padding: 6rpx;
+  margin: 0 40rpx 16rpx;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 12rpx 20rpx;
+  font-size: 26rpx;
+  font-weight: 500;
+  color: #666;
+  border-radius: 8rpx;
+  transition: all 0.3s ease;
+}
+
+.tab-item.active {
+  background: white;
+  color: #007aff;
+  font-weight: 600;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.1);
+}
+
+/* 日期选择器 */
+.date-selector {
+  margin: 0 40rpx 16rpx;
+}
+
+.date-picker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  background: #f8f9fa;
+  border: 1rpx solid #e9ecef;
+  border-radius: 12rpx;
+  padding: 16rpx 20rpx;
+  transition: all 0.3s ease;
+}
+
+.date-picker:active {
+  background: #e9ecef;
+}
+
+.date-text {
+  font-size: 26rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.picker-arrow {
+  font-size: 20rpx;
+  color: #666;
+  transition: transform 0.3s ease;
+}
+
+/* 比赛记录日期信息 */
+.record-date-info {
+  margin-top: 16rpx;
+  text-align: center;
+}
+
+.date-info {
+  font-size: 24rpx;
+  color: #666;
+  background: #f1f3f4;
+  padding: 8rpx 16rpx;
+  border-radius: 8rpx;
+  display: inline-block;
 }
 
 /* 排行榜容器 */
@@ -229,6 +309,8 @@
 /* 比赛记录容器 */
 .history-container {
   padding: 32rpx;
+  box-sizing: border-box;
+  /* 移除固定高度，使用自然页面滚动 */
 }
 
 .history-list {
@@ -237,33 +319,7 @@
   gap: 12rpx;
 }
 
-.history-divider {
-  text-align: center;
-  padding: 20rpx 0;
-  position: relative;
-  margin: 8rpx 0;
-}
 
-.divider-text {
-  background: #f8f9fa;
-  color: #666;
-  font-size: 22rpx;
-  font-weight: 500;
-  padding: 6rpx 16rpx;
-  border-radius: 16rpx;
-  border: 1rpx solid #e9ecef;
-}
-
-.history-divider::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 1rpx;
-  background: #e9ecef;
-  z-index: 0;
-}
 
 .history-item {
   background: #f8f9fa;
@@ -362,28 +418,48 @@
 
 /* 底部操作 */
 .bottom-actions {
-  padding: 20rpx 0 40rpx;
+  padding: 40rpx 0 60rpx;
+  display: flex;
+  gap: 20rpx;
+  margin-top: 20rpx;
 }
 
+.refresh-btn,
 .export-btn {
-  width: 100%;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12rpx;
-  background: linear-gradient(135deg, #007aff 0%, #5856d6 100%);
   color: white;
   border: none;
   border-radius: 16rpx;
   padding: 20rpx;
   font-size: 28rpx;
   font-weight: 600;
-  box-shadow: 0 4rpx 16rpx rgba(0,122,255,0.3);
   transition: all 0.3s ease;
 }
 
+.refresh-btn {
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  box-shadow: 0 4rpx 16rpx rgba(72,187,120,0.3);
+}
+
+.export-btn {
+  background: linear-gradient(135deg, #007aff 0%, #5856d6 100%);
+  box-shadow: 0 4rpx 16rpx rgba(0,122,255,0.3);
+}
+
+.refresh-btn:active,
 .export-btn:active {
   transform: translateY(2rpx);
+}
+
+.refresh-btn:active {
+  box-shadow: 0 2rpx 8rpx rgba(72,187,120,0.3);
+}
+
+.export-btn:active {
   box-shadow: 0 2rpx 8rpx rgba(0,122,255,0.3);
 }
 

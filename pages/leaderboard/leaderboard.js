@@ -7,12 +7,38 @@ Page({
     totalGames: 0,
     totalPlayers: 0,
     loading: false,
-    refreshing: false
+    rankingType: 'total', // 'total' 或 'daily'
+    selectedDate: '', // 选中的日期 YYYY-MM-DD
+    allPlayers: [], // 所有选手数据
+    allGames: [] // 所有比赛数据
   },
 
   onLoad() {
     // 页面首次加载时默认刷新一次
     this.loadDataFromRemote();
+  },
+
+  // 初始化选中日期（在数据加载完成后）
+  initializeSelectedDate(games) {
+    if (games && games.length > 0) {
+      // 找到最近的比赛日期
+      const latestGame = games[0]; // games已经按时间排序
+      if (latestGame && latestGame.gameTime) {
+        const gameDate = new Date(latestGame.gameTime);
+        const dateStr = gameDate.getFullYear() + '-' + 
+                       String(gameDate.getMonth() + 1).padStart(2, '0') + '-' + 
+                       String(gameDate.getDate()).padStart(2, '0');
+        this.setData({ selectedDate: dateStr });
+        return;
+      }
+    }
+    
+    // 如果没有比赛数据，默认为今天
+    const today = new Date();
+    const todayStr = today.getFullYear() + '-' + 
+                     String(today.getMonth() + 1).padStart(2, '0') + '-' + 
+                     String(today.getDate()).padStart(2, '0');
+    this.setData({ selectedDate: todayStr });
   },
 
   onShow() {
@@ -25,7 +51,18 @@ Page({
     const players = wx.getStorageSync('players') || [];
     const games = wx.getStorageSync('games') || [];
     
-    this.processRankings(players);
+    // 如果还没有选中日期，初始化日期
+    if (!this.data.selectedDate) {
+      this.initializeSelectedDate(games);
+    }
+    
+    // 保存数据供切换榜单类型使用
+    this.setData({
+      allPlayers: players,
+      allGames: games
+    });
+    
+    this.processRankings(players, games);
     this.processGameHistory(games);
   },
 
@@ -40,7 +77,18 @@ Page({
         autoSync.loadGamesFromRemote()
       ]);
       
-      this.processRankings(players);
+      // 如果还没有选中日期，初始化日期
+      if (!this.data.selectedDate) {
+        this.initializeSelectedDate(games);
+      }
+      
+      // 保存数据供切换榜单类型使用
+      this.setData({
+        allPlayers: players,
+        allGames: games
+      });
+      
+      this.processRankings(players, games);
       this.processGameHistory(games);
       
       this.setData({ loading: false });
@@ -54,21 +102,122 @@ Page({
   },
 
   // 处理排行榜数据
-  processRankings(players) {
-    const rankings = players
-      .filter(player => (player.totalGames || 0) > 0)
+  processRankings(players, games) {
+    let rankings;
+    
+    if (this.data.rankingType === 'daily') {
+      // 日榜单：只统计选定日期的比赛
+      rankings = this.calculateDailyRankings(players, games, this.data.selectedDate);
+    } else {
+      // 总榜单：使用选手的总体统计
+      rankings = players
+        .filter(player => (player.totalGames || 0) > 0)
+        .map(player => {
+          const totalGames = player.totalGames || 0;
+          const wins = player.wins || 0;
+          const losses = player.losses || 0;
+          const winRate = totalGames > 0 ? Math.round((wins / totalGames) * 100) : 0;
+          
+          return {
+            id: player.id,
+            name: player.name,
+            totalGames,
+            wins,
+            losses,
+            winRate
+          };
+        })
+        .sort((a, b) => {
+          if (b.winRate !== a.winRate) return b.winRate - a.winRate;
+          if (b.totalGames !== a.totalGames) return b.totalGames - a.totalGames;
+          return b.wins - a.wins;
+        });
+    }
+
+    this.setData({ 
+      rankings,
+      totalPlayers: players.length
+    });
+  },
+
+  // 计算日榜单
+  calculateDailyRankings(players, games, targetDate) {
+    // 筛选目标日期的比赛
+    const dailyGames = games.filter(game => {
+      if (!game.gameTime) return false;
+      
+      const gameDate = new Date(game.gameTime);
+      const gameDateStr = gameDate.getFullYear() + '-' + 
+                          String(gameDate.getMonth() + 1).padStart(2, '0') + '-' + 
+                          String(gameDate.getDate()).padStart(2, '0');
+      
+      return gameDateStr === targetDate;
+    });
+
+    // 统计每个选手在该日期的战绩
+    const dailyStats = {};
+    
+    dailyGames.forEach(game => {
+      const player1 = game.player1;
+      const player2 = game.player2;
+      
+      // 检查选手数据是否有效
+      if (!player1 || !player2 || !player1.name || !player2.name) {
+        return;
+      }
+      
+      // 根据选手姓名查找选手ID
+      const player1Info = players.find(p => p.name === player1.name);
+      const player2Info = players.find(p => p.name === player2.name);
+      
+      if (!player1Info || !player2Info) {
+        return;
+      }
+      
+      // 初始化选手统计（使用选手姓名作为键）
+      if (!dailyStats[player1.name]) {
+        dailyStats[player1.name] = {
+          id: player1Info.id,
+          name: player1.name,
+          wins: 0,
+          losses: 0,
+          totalGames: 0
+        };
+      }
+      if (!dailyStats[player2.name]) {
+        dailyStats[player2.name] = {
+          id: player2Info.id,
+          name: player2.name,
+          wins: 0,
+          losses: 0,
+          totalGames: 0
+        };
+      }
+      
+      // 更新统计
+      dailyStats[player1.name].totalGames++;
+      dailyStats[player2.name].totalGames++;
+      
+      const score1 = parseInt(player1.score) || 0;
+      const score2 = parseInt(player2.score) || 0;
+      
+      if (score1 > score2) {
+        dailyStats[player1.name].wins++;
+        dailyStats[player2.name].losses++;
+      } else if (score2 > score1) {
+        dailyStats[player2.name].wins++;
+        dailyStats[player1.name].losses++;
+      }
+      // 平局不计入胜负
+    });
+
+    // 转换为排行榜格式并排序
+    return Object.values(dailyStats)
+      .filter(player => player.totalGames > 0)
       .map(player => {
-        const totalGames = player.totalGames || 0;
-        const wins = player.wins || 0;
-        const losses = player.losses || 0;
-        const winRate = totalGames > 0 ? Math.round((wins / totalGames) * 100) : 0;
-        
+        const winRate = player.totalGames > 0 ? Math.round((player.wins / player.totalGames) * 100) : 0;
         return {
-          id: player.id,
-          name: player.name,
-          totalGames,
-          wins,
-          losses,
+          ...player,
           winRate
         };
       })
@@ -77,11 +226,6 @@ Page({
         if (b.totalGames !== a.totalGames) return b.totalGames - a.totalGames;
         return b.wins - a.wins;
       });
-
-    this.setData({ 
-      rankings,
-      totalPlayers: players.length
-    });
   },
 
   // 处理比赛历史数据
@@ -94,61 +238,46 @@ Page({
       return;
     }
 
-    // 获取今天和上月今日的日期
-    const today = new Date();
-    const lastMonthToday = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+    let filteredGames;
     
-    // 格式化日期用于比较 (YYYY-MM-DD)
-    const formatDate = (date) => {
-      return date.getFullYear() + '-' + 
-             String(date.getMonth() + 1).padStart(2, '0') + '-' + 
-             String(date.getDate()).padStart(2, '0');
-    };
-    
-    const todayStr = formatDate(today);
-    const lastMonthTodayStr = formatDate(lastMonthToday);
-    
-    // 分类游戏记录
-    const recentGames = [];
-    const lastMonthTodayGames = [];
-    
-    games.forEach(game => {
-      const gameDate = new Date(game.gameTime);
-      const gameDateStr = formatDate(gameDate);
+    if (this.data.rankingType === 'daily' && this.data.selectedDate) {
+      // 日榜单模式：只显示选定日期的比赛记录，没有则为空
+      filteredGames = games.filter(game => {
+        if (!game.gameTime) return false;
+        
+        const gameDate = new Date(game.gameTime);
+        const gameDateStr = gameDate.getFullYear() + '-' + 
+                            String(gameDate.getMonth() + 1).padStart(2, '0') + '-' + 
+                            String(gameDate.getDate()).padStart(2, '0');
+        
+        return gameDateStr === this.data.selectedDate;
+      });
+    } else {
+      // 总榜单模式：显示今天的比赛记录
+      const today = new Date();
+      const todayStr = today.getFullYear() + '-' + 
+                      String(today.getMonth() + 1).padStart(2, '0') + '-' + 
+                      String(today.getDate()).padStart(2, '0');
       
-      // 上月今日的记录
-      if (gameDateStr === lastMonthTodayStr) {
-        lastMonthTodayGames.push(game);
-      }
-      // 最近的记录（排除上月今日已经收集的）
-      else if (recentGames.length < 10) {
-        recentGames.push(game);
-      }
-    });
-    
-    // 合并记录：最近10条 + 上月今日
-    let displayGames = [...recentGames];
-    
-    // 如果有上月今日的记录，添加分隔标识并加入
-    if (lastMonthTodayGames.length > 0) {
-      // 添加分隔符标识
-      displayGames.push({
-        id: 'separator-lastmonth',
-        isSeparator: true,
-        separatorText: '上月今日'
+      filteredGames = games.filter(game => {
+        if (!game.gameTime) return false;
+        
+        const gameDate = new Date(game.gameTime);
+        const gameDateStr = gameDate.getFullYear() + '-' + 
+                            String(gameDate.getMonth() + 1).padStart(2, '0') + '-' + 
+                            String(gameDate.getDate()).padStart(2, '0');
+        
+        return gameDateStr === todayStr;
       });
       
-      // 添加上月今日的记录
-      displayGames = displayGames.concat(lastMonthTodayGames);
+      // 只有在总榜单模式下，如果今天没有数据才显示最近10条
+      if (filteredGames.length === 0) {
+        filteredGames = games.slice(0, 10);
+      }
     }
     
     // 格式化显示数据
-    const gameHistory = displayGames.map(game => {
-      // 分隔符直接返回
-      if (game.isSeparator) {
-        return game;
-      }
-      
+    const gameHistory = filteredGames.map(game => {
       const gameTime = new Date(game.gameTime);
       const formattedTime = `${gameTime.getMonth() + 1}/${gameTime.getDate()} ${gameTime.getHours()}:${gameTime.getMinutes().toString().padStart(2, '0')}`;
       
@@ -173,11 +302,13 @@ Page({
     });
   },
 
-  // 下拉刷新
-  async onPullDownRefresh() {
-    this.setData({ refreshing: true });
-    
+
+
+  // 手动刷新
+  async manualRefresh() {
     try {
+      this.setData({ loading: true });
+      
       // 重新计算选手统计
       await autoSync.recalculatePlayerStats();
       // 重新加载数据
@@ -195,8 +326,28 @@ Page({
         icon: 'none',
         duration: 2000
       });
-    } finally {
-      this.setData({ refreshing: false });
+    }
+  },
+
+  // 切换榜单类型
+  switchRankingType(e) {
+    const type = e.currentTarget.dataset.type;
+    this.setData({ rankingType: type });
+    
+    // 重新处理排行榜数据和比赛记录
+    this.processRankings(this.data.allPlayers, this.data.allGames);
+    this.processGameHistory(this.data.allGames);
+  },
+
+  // 日期选择器变化
+  onDateChange(e) {
+    const selectedDate = e.detail.value;
+    this.setData({ selectedDate });
+    
+    // 如果当前是日榜单模式，重新处理排行榜数据和比赛记录
+    if (this.data.rankingType === 'daily') {
+      this.processRankings(this.data.allPlayers, this.data.allGames);
+      this.processGameHistory(this.data.allGames);
     }
   },
 
@@ -221,17 +372,28 @@ Page({
         exportText += `${index + 1}\t${player.name}\t${player.totalGames}\t${player.wins}\t${player.losses}\t${player.winRate}%\n`;
       });
       
-      exportText += '\n🎮 比赛记录 (最近10条 + 上月今日)\n';
-      exportText += '时间\t选手A\t比分\t选手B\t结果\n';
+      // 根据当前显示模式确定比赛记录的描述
+      let recordDescription;
+      if (this.data.rankingType === 'daily') {
+        recordDescription = `🎮 比赛记录 (${this.data.selectedDate})`;
+      } else {
+        const today = new Date();
+        const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+        recordDescription = `🎮 比赛记录 (今日 ${todayStr})`;
+      }
       
-      this.data.gameHistory.forEach(item => {
-        if (item.isSeparator) {
-          exportText += `\n--- ${item.separatorText} ---\n`;
-        } else {
+      exportText += `\n${recordDescription}\n`;
+      
+      if (this.data.gameHistory.length > 0) {
+        exportText += '时间\t选手A\t比分\t选手B\t结果\n';
+        
+        this.data.gameHistory.forEach(item => {
           const result = item.isDraw ? '平局' : `${item.winner}获胜`;
           exportText += `${item.formattedTime}\t${item.player1?.name}\t${item.player1?.score}:${item.player2?.score}\t${item.player2?.name}\t${result}\n`;
-        }
-      });
+        });
+      } else {
+        exportText += '该日期暂无比赛记录\n';
+      }
       
       wx.hideLoading();
       

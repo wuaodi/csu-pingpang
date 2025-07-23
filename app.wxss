@@ -5,6 +5,9 @@ page {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  /* 优化页面滚动体验 */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* scroll-view重置样式 */
