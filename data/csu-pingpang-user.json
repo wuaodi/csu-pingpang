@@ -1,0 +1,55 @@
+[
+    {
+      "id": 1753169453784,
+      "name": "奥迪",
+      "totalGames": 32,
+      "wins": 16,
+      "losses": 16,
+      "createTime": "2025-07-22T07:30:53.784Z",
+      "winRate": 64
+    },
+    {
+      "id": 1753169461991,
+      "name": "CSU王楚钦",
+      "totalGames": 40,
+      "wins": 14,
+      "losses": 26,
+      "createTime": "2025-07-22T07:31:01.991Z",
+      "winRate": 57
+    },
+    {
+      "id": 1753170891181,
+      "name": "李霜琳",
+      "totalGames": 52,
+      "wins": 29,
+      "losses": 23,
+      "createTime": "2025-07-22T07:54:51.181Z",
+      "winRate": 0
+    },
+    {
+      "id": 1753172222657,
+      "name": "龙哥",
+      "totalGames": 65,
+      "wins": 20,
+      "losses": 45,
+      "createTime": "2025-07-22T08:17:02.657Z",
+      "winRate": 33
+    },
+    {
+      "id": 1753189917593,
+      "name": "孙钰涵",
+      "totalGames": 45,
+      "wins": 18,
+      "losses": 27,
+      "createTime": "2025-07-22T13:11:57.593Z",
+      "winRate": 0
+    },
+    {
+      "id": 1753192846731,
+      "name": "石玉",
+      "totalGames": 68,
+      "wins": 54,
+      "losses": 14,
+      "createTime": "2025-07-22T14:00:46.731Z"
+    }
+  ]

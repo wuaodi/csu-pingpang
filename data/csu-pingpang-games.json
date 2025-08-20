@@ -1,0 +1,2116 @@
+[
+    {
+      "id": 1755666120443,
+      "player1": {
+        "name": "龙哥",
+        "score": 11
+      },
+      "player2": {
+        "name": "奥迪",
+        "score": 5
+      },
+      "winner": "龙哥",
+      "gameTime": "2025-08-20T05:02:00.443Z",
+      "createTime": "2025-08-20T05:02:00.443Z"
+    },
+    {
+      "id": 1755665906017,
+      "player1": {
+        "name": "李霜琳",
+        "score": 12
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 10
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-08-20T04:58:26.017Z",
+      "createTime": "2025-08-20T04:58:26.017Z"
+    },
+    {
+      "id": 1755665753700,
+      "player1": {
+        "name": "龙哥",
+        "score": 9
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 11
+      },
+      "winner": "石玉",
+      "gameTime": "2025-08-20T04:55:53.700Z",
+      "createTime": "2025-08-20T04:55:53.700Z"
+    },
+    {
+      "id": 1755665675779,
+      "player1": {
+        "name": "孙钰涵",
+        "score": 11
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 6
+      },
+      "winner": "孙钰涵",
+      "gameTime": "2025-08-20T04:54:35.779Z",
+      "createTime": "2025-08-20T04:54:35.779Z"
+    },
+    {
+      "id": 1755665566294,
+      "player1": {
+        "name": "石玉",
+        "score": 11
+      },
+      "player2": {
+        "name": "奥迪",
+        "score": 8
+      },
+      "winner": "石玉",
+      "gameTime": "2025-08-20T04:52:46.295Z",
+      "createTime": "2025-08-20T04:52:46.295Z"
+    },
+    {
+      "id": 1755665042241,
+      "player1": {
+        "name": "龙哥",
+        "score": 12
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 10
+      },
+      "winner": "龙哥",
+      "gameTime": "2025-08-20T04:44:02.241Z",
+      "createTime": "2025-08-20T04:44:02.241Z"
+    },
+    {
+      "id": 1755664839716,
+      "player1": {
+        "name": "李霜琳",
+        "score": 10
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 12
+      },
+      "winner": "龙哥",
+      "gameTime": "2025-08-20T04:40:39.716Z",
+      "createTime": "2025-08-20T04:40:39.716Z"
+    },
+    {
+      "id": 1755664654188,
+      "player1": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 6
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-08-20T04:37:34.188Z",
+      "createTime": "2025-08-20T04:37:34.188Z"
+    },
+    {
+      "id": 1755664449563,
+      "player1": {
+        "name": "奥迪",
+        "score": 6
+      },
+      "player2": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-08-20T04:34:09.563Z",
+      "createTime": "2025-08-20T04:34:09.563Z"
+    },
+    {
+      "id": 1755664419119,
+      "player1": {
+        "name": "李霜琳",
+        "score": 8
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 11
+      },
+      "winner": "石玉",
+      "gameTime": "2025-08-20T04:33:39.119Z",
+      "createTime": "2025-08-20T04:33:39.119Z"
+    },
+    {
+      "id": 1755664240827,
+      "player1": {
+        "name": "奥迪",
+        "score": 12
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 10
+      },
+      "winner": "奥迪",
+      "gameTime": "2025-08-20T04:30:40.827Z",
+      "createTime": "2025-08-20T04:30:40.827Z"
+    },
+    {
+      "id": 1755663687845,
+      "player1": {
+        "name": "孙钰涵",
+        "score": 10
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 12
+      },
+      "winner": "石玉",
+      "gameTime": "2025-08-20T04:21:27.845Z",
+      "createTime": "2025-08-20T04:21:27.845Z"
+    },
+    {
+      "id": 1755663484988,
+      "player1": {
+        "name": "奥迪",
+        "score": 6
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 11
+      },
+      "winner": "孙钰涵",
+      "gameTime": "2025-08-20T04:18:04.988Z",
+      "createTime": "2025-08-20T04:18:04.989Z"
+    },
+    {
+      "id": 1755663291092,
+      "player1": {
+        "name": "奥迪",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 7
+      },
+      "winner": "奥迪",
+      "gameTime": "2025-08-20T04:14:51.092Z",
+      "createTime": "2025-08-20T04:14:51.092Z"
+    },
+    {
+      "id": 1755663017530,
+      "player1": {
+        "name": "龙哥",
+        "score": 12
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 10
+      },
+      "winner": "龙哥",
+      "gameTime": "2025-08-20T04:10:17.530Z",
+      "createTime": "2025-08-20T04:10:17.530Z"
+    },
+    {
+      "id": 1755579814260,
+      "player1": {
+        "name": "奥迪",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 8
+      },
+      "winner": "奥迪",
+      "gameTime": "2025-08-19T05:03:34.260Z",
+      "createTime": "2025-08-19T05:03:34.260Z"
+    },
+    {
+      "id": 1755579519106,
+      "player1": {
+        "name": "龙哥",
+        "score": 11
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 9
+      },
+      "winner": "龙哥",
+      "gameTime": "2025-08-19T04:58:39.106Z",
+      "createTime": "2025-08-19T04:58:39.106Z"
+    },
+    {
+      "id": 1755579418418,
+      "player1": {
+        "name": "龙哥",
+        "score": 11
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 9
+      },
+      "winner": "龙哥",
+      "gameTime": "2025-08-19T04:56:58.418Z",
+      "createTime": "2025-08-19T04:56:58.418Z"
+    },
+    {
+      "id": 1755579086826,
+      "player1": {
+        "name": "奥迪",
+        "score": 6
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 11
+      },
+      "winner": "龙哥",
+      "gameTime": "2025-08-19T04:51:26.826Z",
+      "createTime": "2025-08-19T04:51:26.826Z"
+    },
+    {
+      "id": 1755578844726,
+      "player1": {
+        "name": "奥迪",
+        "score": 13
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 11
+      },
+      "winner": "奥迪",
+      "gameTime": "2025-08-19T04:47:24.726Z",
+      "createTime": "2025-08-19T04:47:24.726Z"
+    },
+    {
+      "id": 1755578660229,
+      "player1": {
+        "name": "龙哥",
+        "score": 7
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 11
+      },
+      "winner": "孙钰涵",
+      "gameTime": "2025-08-19T04:44:20.229Z",
+      "createTime": "2025-08-19T04:44:20.229Z"
+    },
+    {
+      "id": 1755578490759,
+      "player1": {
+        "name": "奥迪",
+        "score": 3
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 11
+      },
+      "winner": "石玉",
+      "gameTime": "2025-08-19T04:41:30.759Z",
+      "createTime": "2025-08-19T04:41:30.759Z"
+    },
+    {
+      "id": 1755578272234,
+      "player1": {
+        "name": "孙钰涵",
+        "score": 12
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 14
+      },
+      "winner": "石玉",
+      "gameTime": "2025-08-19T04:37:52.234Z",
+      "createTime": "2025-08-19T04:37:52.234Z"
+    },
+    {
+      "id": 1755578013046,
+      "player1": {
+        "name": "石玉",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 6
+      },
+      "winner": "石玉",
+      "gameTime": "2025-08-19T04:33:33.046Z",
+      "createTime": "2025-08-19T04:33:33.046Z"
+    },
+    {
+      "id": 1755577739659,
+      "player1": {
+        "name": "奥迪",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 6
+      },
+      "winner": "奥迪",
+      "gameTime": "2025-08-19T04:28:59.659Z",
+      "createTime": "2025-08-19T04:28:59.659Z"
+    },
+    {
+      "id": 1755577468344,
+      "player1": {
+        "name": "奥迪",
+        "score": 1
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 11
+      },
+      "winner": "孙钰涵",
+      "gameTime": "2025-08-19T04:24:28.344Z",
+      "createTime": "2025-08-19T04:24:28.344Z"
+    },
+    {
+      "id": 1755577321380,
+      "player1": {
+        "name": "龙哥",
+        "score": 8
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 11
+      },
+      "winner": "孙钰涵",
+      "gameTime": "2025-08-19T04:22:01.380Z",
+      "createTime": "2025-08-19T04:22:01.380Z"
+    },
+    {
+      "id": 1755577131225,
+      "player1": {
+        "name": "奥迪",
+        "score": 2
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 11
+      },
+      "winner": "石玉",
+      "gameTime": "2025-08-19T04:18:51.225Z",
+      "createTime": "2025-08-19T04:18:51.225Z"
+    },
+    {
+      "id": 1755576831513,
+      "player1": {
+        "name": "石玉",
+        "score": 12
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 10
+      },
+      "winner": "石玉",
+      "gameTime": "2025-08-19T04:13:51.513Z",
+      "createTime": "2025-08-19T04:13:51.513Z"
+    },
+    {
+      "id": 1755576467771,
+      "player1": {
+        "name": "石玉",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 5
+      },
+      "winner": "石玉",
+      "gameTime": "2025-08-19T04:07:47.771Z",
+      "createTime": "2025-08-19T04:07:47.771Z"
+    },
+    {
+      "id": 1755493023265,
+      "player1": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 3
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-08-18T04:57:03.265Z",
+      "createTime": "2025-08-18T04:57:03.265Z"
+    },
+    {
+      "id": 1755492890625,
+      "player1": {
+        "name": "CSU王楚钦",
+        "score": 11
+      },
+      "player2": {
+        "name": "李霜琳",
+        "score": 7
+      },
+      "winner": "CSU王楚钦",
+      "gameTime": "2025-08-18T04:54:50.625Z",
+      "createTime": "2025-08-18T04:54:50.625Z"
+    },
+    {
+      "id": 1755492703718,
+      "player1": {
+        "name": "石玉",
+        "score": 11
+      },
+      "player2": {
+        "name": "CSU王楚钦",
+        "score": 5
+      },
+      "winner": "石玉",
+      "gameTime": "2025-08-18T04:51:43.718Z",
+      "createTime": "2025-08-18T04:51:43.718Z"
+    },
+    {
+      "id": 1755492443874,
+      "player1": {
+        "name": "石玉",
+        "score": 11
+      },
+      "player2": {
+        "name": "李霜琳",
+        "score": 8
+      },
+      "winner": "石玉",
+      "gameTime": "2025-08-18T04:47:23.874Z",
+      "createTime": "2025-08-18T04:47:23.874Z"
+    },
+    {
+      "id": 1755492233572,
+      "player1": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 2
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-08-18T04:43:53.572Z",
+      "createTime": "2025-08-18T04:43:53.572Z"
+    },
+    {
+      "id": 1755492056450,
+      "player1": {
+        "name": "龙哥",
+        "score": 4
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 11
+      },
+      "winner": "孙钰涵",
+      "gameTime": "2025-08-18T04:40:56.450Z",
+      "createTime": "2025-08-18T04:40:56.450Z"
+    },
+    {
+      "id": 1755491944841,
+      "player1": {
+        "name": "龙哥",
+        "score": 11
+      },
+      "player2": {
+        "name": "CSU王楚钦",
+        "score": 2
+      },
+      "winner": "龙哥",
+      "gameTime": "2025-08-18T04:39:04.841Z",
+      "createTime": "2025-08-18T04:39:04.841Z"
+    },
+    {
+      "id": 1755491700793,
+      "player1": {
+        "name": "李霜琳",
+        "score": 10
+      },
+      "player2": {
+        "name": "奥迪",
+        "score": 12
+      },
+      "winner": "奥迪",
+      "gameTime": "2025-08-18T04:35:00.793Z",
+      "createTime": "2025-08-18T04:35:00.793Z"
+    },
+    {
+      "id": 1755491520276,
+      "player1": {
+        "name": "奥迪",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 6
+      },
+      "winner": "奥迪",
+      "gameTime": "2025-08-18T04:32:00.276Z",
+      "createTime": "2025-08-18T04:32:00.276Z"
+    },
+    {
+      "id": 1755491279717,
+      "player1": {
+        "name": "奥迪",
+        "score": 14
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 12
+      },
+      "winner": "奥迪",
+      "gameTime": "2025-08-18T04:27:59.717Z",
+      "createTime": "2025-08-18T04:27:59.718Z"
+    },
+    {
+      "id": 1755491068264,
+      "player1": {
+        "name": "孙钰涵",
+        "score": 11
+      },
+      "player2": {
+        "name": "CSU王楚钦",
+        "score": 2
+      },
+      "winner": "孙钰涵",
+      "gameTime": "2025-08-18T04:24:28.264Z",
+      "createTime": "2025-08-18T04:24:28.264Z"
+    },
+    {
+      "id": 1755490919062,
+      "player1": {
+        "name": "孙钰涵",
+        "score": 11
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 2
+      },
+      "winner": "孙钰涵",
+      "gameTime": "2025-08-18T04:21:59.062Z",
+      "createTime": "2025-08-18T04:21:59.062Z"
+    },
+    {
+      "id": 1755490724469,
+      "player1": {
+        "name": "石玉",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 5
+      },
+      "winner": "石玉",
+      "gameTime": "2025-08-18T04:18:44.469Z",
+      "createTime": "2025-08-18T04:18:44.469Z"
+    },
+    {
+      "id": 1755490464319,
+      "player1": {
+        "name": "奥迪",
+        "score": 6
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 11
+      },
+      "winner": "石玉",
+      "gameTime": "2025-08-18T04:14:24.319Z",
+      "createTime": "2025-08-18T04:14:24.319Z"
+    },
+    {
+      "id": 1755490451938,
+      "player1": {
+        "name": "奥迪",
+        "score": 11
+      },
+      "player2": {
+        "name": "CSU王楚钦",
+        "score": 5
+      },
+      "winner": "奥迪",
+      "gameTime": "2025-08-18T04:14:11.938Z",
+      "createTime": "2025-08-18T04:14:11.938Z"
+    },
+    {
+      "id": 1754024652260,
+      "player1": {
+        "name": "龙哥",
+        "score": 1
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 11
+      },
+      "winner": "孙钰涵",
+      "gameTime": "2025-08-01T05:04:12.260Z",
+      "createTime": "2025-08-01T05:04:12.260Z"
+    },
+    {
+      "id": 1754024581683,
+      "player1": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 5
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-08-01T05:03:01.683Z",
+      "createTime": "2025-08-01T05:03:01.683Z"
+    },
+    {
+      "id": 1754024546420,
+      "player1": {
+        "name": "CSU王楚钦",
+        "score": 8
+      },
+      "player2": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-08-01T05:02:26.420Z",
+      "createTime": "2025-08-01T05:02:26.421Z"
+    },
+    {
+      "id": 1754024429749,
+      "player1": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 6
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-08-01T05:00:29.749Z",
+      "createTime": "2025-08-01T05:00:29.749Z"
+    },
+    {
+      "id": 1754023992145,
+      "player1": {
+        "name": "CSU王楚钦",
+        "score": 5
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 11
+      },
+      "winner": "孙钰涵",
+      "gameTime": "2025-08-01T04:53:12.145Z",
+      "createTime": "2025-08-01T04:53:12.145Z"
+    },
+    {
+      "id": 1754023987748,
+      "player1": {
+        "name": "CSU王楚钦",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 8
+      },
+      "winner": "CSU王楚钦",
+      "gameTime": "2025-08-01T04:53:07.748Z",
+      "createTime": "2025-08-01T04:53:07.750Z"
+    },
+    {
+      "id": 1754023516349,
+      "player1": {
+        "name": "李霜琳",
+        "score": 9
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 11
+      },
+      "winner": "石玉",
+      "gameTime": "2025-08-01T04:45:16.350Z",
+      "createTime": "2025-08-01T04:45:16.350Z"
+    },
+    {
+      "id": 1754023261377,
+      "player1": {
+        "name": "石玉",
+        "score": 12
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 10
+      },
+      "winner": "石玉",
+      "gameTime": "2025-08-01T04:41:01.377Z",
+      "createTime": "2025-08-01T04:41:01.377Z"
+    },
+    {
+      "id": 1754023143625,
+      "player1": {
+        "name": "石玉",
+        "score": 11
+      },
+      "player2": {
+        "name": "CSU王楚钦",
+        "score": 9
+      },
+      "winner": "石玉",
+      "gameTime": "2025-08-01T04:39:03.625Z",
+      "createTime": "2025-08-01T04:39:03.625Z"
+    },
+    {
+      "id": 1754022839197,
+      "player1": {
+        "name": "石玉",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 4
+      },
+      "winner": "石玉",
+      "gameTime": "2025-08-01T04:33:59.197Z",
+      "createTime": "2025-08-01T04:33:59.197Z"
+    },
+    {
+      "id": 1754022586277,
+      "player1": {
+        "name": "龙哥",
+        "score": 6
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 11
+      },
+      "winner": "孙钰涵",
+      "gameTime": "2025-08-01T04:29:46.277Z",
+      "createTime": "2025-08-01T04:29:46.277Z"
+    },
+    {
+      "id": 1754022328449,
+      "player1": {
+        "name": "CSU王楚钦",
+        "score": 5
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 11
+      },
+      "winner": "石玉",
+      "gameTime": "2025-08-01T04:25:28.450Z",
+      "createTime": "2025-08-01T04:25:28.451Z"
+    },
+    {
+      "id": 1754022041883,
+      "player1": {
+        "name": "孙钰涵",
+        "score": 11
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 13
+      },
+      "winner": "石玉",
+      "gameTime": "2025-08-01T04:20:41.883Z",
+      "createTime": "2025-08-01T04:20:41.883Z"
+    },
+    {
+      "id": 1754021791258,
+      "player1": {
+        "name": "孙钰涵",
+        "score": 11
+      },
+      "player2": {
+        "name": "CSU王楚钦",
+        "score": 0
+      },
+      "winner": "孙钰涵",
+      "gameTime": "2025-08-01T04:16:31.258Z",
+      "createTime": "2025-08-01T04:16:31.258Z"
+    },
+    {
+      "id": 1754021524785,
+      "player1": {
+        "name": "CSU王楚钦",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 3
+      },
+      "winner": "CSU王楚钦",
+      "gameTime": "2025-08-01T04:12:04.785Z",
+      "createTime": "2025-08-01T04:12:04.785Z"
+    },
+    {
+      "id": 1754021352833,
+      "player1": {
+        "name": "龙哥",
+        "score": 11
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 6
+      },
+      "winner": "龙哥",
+      "gameTime": "2025-08-01T04:09:12.833Z",
+      "createTime": "2025-08-01T04:09:12.833Z"
+    },
+    {
+      "id": 1753938385507,
+      "player1": {
+        "name": "石玉",
+        "score": 11
+      },
+      "player2": {
+        "name": "李霜琳",
+        "score": 8
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-31T05:06:25.507Z",
+      "createTime": "2025-07-31T05:06:25.507Z"
+    },
+    {
+      "id": 1753938335896,
+      "player1": {
+        "name": "CSU王楚钦",
+        "score": 9
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 11
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-31T05:05:35.896Z",
+      "createTime": "2025-07-31T05:05:35.896Z"
+    },
+    {
+      "id": 1753938332227,
+      "player1": {
+        "name": "石玉",
+        "score": 11
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 9
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-31T05:05:32.227Z",
+      "createTime": "2025-07-31T05:05:32.227Z"
+    },
+    {
+      "id": 1753938304910,
+      "player1": {
+        "name": "龙哥",
+        "score": 9
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 11
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-31T05:05:04.910Z",
+      "createTime": "2025-07-31T05:05:04.910Z"
+    },
+    {
+      "id": 1753937188867,
+      "player1": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 4
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-07-31T04:46:28.867Z",
+      "createTime": "2025-07-31T04:46:28.867Z"
+    },
+    {
+      "id": 1753936917126,
+      "player1": {
+        "name": "CSU王楚钦",
+        "score": 10
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 12
+      },
+      "winner": "龙哥",
+      "gameTime": "2025-07-31T04:41:57.126Z",
+      "createTime": "2025-07-31T04:41:57.126Z"
+    },
+    {
+      "id": 1753936494621,
+      "player1": {
+        "name": "龙哥",
+        "score": 12
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 10
+      },
+      "winner": "龙哥",
+      "gameTime": "2025-07-31T04:34:54.621Z",
+      "createTime": "2025-07-31T04:34:54.621Z"
+    },
+    {
+      "id": 1753936276748,
+      "player1": {
+        "name": "CSU王楚钦",
+        "score": 2
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 11
+      },
+      "winner": "孙钰涵",
+      "gameTime": "2025-07-31T04:31:16.748Z",
+      "createTime": "2025-07-31T04:31:16.748Z"
+    },
+    {
+      "id": 1753936141493,
+      "player1": {
+        "name": "李霜琳",
+        "score": 9
+      },
+      "player2": {
+        "name": "CSU王楚钦",
+        "score": 11
+      },
+      "winner": "CSU王楚钦",
+      "gameTime": "2025-07-31T04:29:01.493Z",
+      "createTime": "2025-07-31T04:29:01.493Z"
+    },
+    {
+      "id": 1753935964008,
+      "player1": {
+        "name": "龙哥",
+        "score": 7
+      },
+      "player2": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-07-31T04:26:04.008Z",
+      "createTime": "2025-07-31T04:26:04.008Z"
+    },
+    {
+      "id": 1753935893990,
+      "player1": {
+        "name": "孙钰涵",
+        "score": 9
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 11
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-31T04:24:53.990Z",
+      "createTime": "2025-07-31T04:24:53.990Z"
+    },
+    {
+      "id": 1753935520262,
+      "player1": {
+        "name": "石玉",
+        "score": 11
+      },
+      "player2": {
+        "name": "CSU王楚钦",
+        "score": 7
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-31T04:18:40.262Z",
+      "createTime": "2025-07-31T04:18:40.262Z"
+    },
+    {
+      "id": 1753935192132,
+      "player1": {
+        "name": "石玉",
+        "score": 11
+      },
+      "player2": {
+        "name": "李霜琳",
+        "score": 8
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-31T04:13:12.132Z",
+      "createTime": "2025-07-31T04:13:12.132Z"
+    },
+    {
+      "id": 1753934901131,
+      "player1": {
+        "name": "龙哥",
+        "score": 9
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 11
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-31T04:08:21.131Z",
+      "createTime": "2025-07-31T04:08:21.131Z"
+    },
+    {
+      "id": 1753851736706,
+      "player1": {
+        "name": "石玉",
+        "score": 12
+      },
+      "player2": {
+        "name": "CSU王楚钦",
+        "score": 10
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-30T05:02:16.706Z",
+      "createTime": "2025-07-30T05:02:16.706Z"
+    },
+    {
+      "id": 1753851395437,
+      "player1": {
+        "name": "CSU王楚钦",
+        "score": 11
+      },
+      "player2": {
+        "name": "李霜琳",
+        "score": 8
+      },
+      "winner": "CSU王楚钦",
+      "gameTime": "2025-07-30T04:56:35.437Z",
+      "createTime": "2025-07-30T04:56:35.437Z"
+    },
+    {
+      "id": 1753851061786,
+      "player1": {
+        "name": "龙哥",
+        "score": 5
+      },
+      "player2": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-07-30T04:51:01.786Z",
+      "createTime": "2025-07-30T04:51:01.786Z"
+    },
+    {
+      "id": 1753850950067,
+      "player1": {
+        "name": "CSU王楚钦",
+        "score": 5
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 11
+      },
+      "winner": "龙哥",
+      "gameTime": "2025-07-30T04:49:10.067Z",
+      "createTime": "2025-07-30T04:49:10.067Z"
+    },
+    {
+      "id": 1753850657689,
+      "player1": {
+        "name": "石玉",
+        "score": 8
+      },
+      "player2": {
+        "name": "CSU王楚钦",
+        "score": 11
+      },
+      "winner": "CSU王楚钦",
+      "gameTime": "2025-07-30T04:44:17.689Z",
+      "createTime": "2025-07-30T04:44:17.689Z"
+    },
+    {
+      "id": 1753850374407,
+      "player1": {
+        "name": "石玉",
+        "score": 11
+      },
+      "player2": {
+        "name": "李霜琳",
+        "score": 8
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-30T04:39:34.407Z",
+      "createTime": "2025-07-30T04:39:34.407Z"
+    },
+    {
+      "id": 1753850360953,
+      "player1": {
+        "name": "龙哥",
+        "score": 8
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 11
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-30T04:39:20.953Z",
+      "createTime": "2025-07-30T04:39:20.953Z"
+    },
+    {
+      "id": 1753849845448,
+      "player1": {
+        "name": "CSU王楚钦",
+        "score": 12
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 10
+      },
+      "winner": "CSU王楚钦",
+      "gameTime": "2025-07-30T04:30:45.448Z",
+      "createTime": "2025-07-30T04:30:45.448Z"
+    },
+    {
+      "id": 1753849445502,
+      "player1": {
+        "name": "龙哥",
+        "score": 9
+      },
+      "player2": {
+        "name": "CSU王楚钦",
+        "score": 11
+      },
+      "winner": "CSU王楚钦",
+      "gameTime": "2025-07-30T04:24:05.502Z",
+      "createTime": "2025-07-30T04:24:05.502Z"
+    },
+    {
+      "id": 1753849239299,
+      "player1": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "player2": {
+        "name": "CSU王楚钦",
+        "score": 9
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-07-30T04:20:39.299Z",
+      "createTime": "2025-07-30T04:20:39.299Z"
+    },
+    {
+      "id": 1753849119102,
+      "player1": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 6
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-07-30T04:18:39.102Z",
+      "createTime": "2025-07-30T04:18:39.102Z"
+    },
+    {
+      "id": 1753848631067,
+      "player1": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 6
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-07-30T04:10:31.067Z",
+      "createTime": "2025-07-30T04:10:31.067Z"
+    },
+    {
+      "id": 1753848402449,
+      "player1": {
+        "name": "石玉",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 6
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-30T04:06:42.449Z",
+      "createTime": "2025-07-30T04:06:42.449Z"
+    },
+    {
+      "id": 1753765022232,
+      "player1": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 0
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-07-29T04:57:02.232Z",
+      "createTime": "2025-07-29T04:57:02.232Z"
+    },
+    {
+      "id": 1753764848415,
+      "player1": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 9
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-07-29T04:54:08.415Z",
+      "createTime": "2025-07-29T04:54:08.415Z"
+    },
+    {
+      "id": 1753764649147,
+      "player1": {
+        "name": "龙哥",
+        "score": 13
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 11
+      },
+      "winner": "龙哥",
+      "gameTime": "2025-07-29T04:50:49.147Z",
+      "createTime": "2025-07-29T04:50:49.147Z"
+    },
+    {
+      "id": 1753764421248,
+      "player1": {
+        "name": "李霜琳",
+        "score": 10
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 12
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-29T04:47:01.248Z",
+      "createTime": "2025-07-29T04:47:01.248Z"
+    },
+    {
+      "id": 1753764158452,
+      "player1": {
+        "name": "孙钰涵",
+        "score": 9
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 11
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-29T04:42:38.452Z",
+      "createTime": "2025-07-29T04:42:38.452Z"
+    },
+    {
+      "id": 1753763996338,
+      "player1": {
+        "name": "石玉",
+        "score": 12
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 10
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-29T04:39:56.338Z",
+      "createTime": "2025-07-29T04:39:56.338Z"
+    },
+    {
+      "id": 1753763595930,
+      "player1": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 8
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-07-29T04:33:15.930Z",
+      "createTime": "2025-07-29T04:33:15.930Z"
+    },
+    {
+      "id": 1753763397743,
+      "player1": {
+        "name": "李霜琳",
+        "score": 12
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 14
+      },
+      "winner": "龙哥",
+      "gameTime": "2025-07-29T04:29:57.743Z",
+      "createTime": "2025-07-29T04:29:57.744Z"
+    },
+    {
+      "id": 1753763077028,
+      "player1": {
+        "name": "孙钰涵",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 0
+      },
+      "winner": "孙钰涵",
+      "gameTime": "2025-07-29T04:24:37.028Z",
+      "createTime": "2025-07-29T04:24:37.028Z"
+    },
+    {
+      "id": 1753762986515,
+      "player1": {
+        "name": "孙钰涵",
+        "score": 12
+      },
+      "player2": {
+        "name": "李霜琳",
+        "score": 10
+      },
+      "winner": "孙钰涵",
+      "gameTime": "2025-07-29T04:23:06.515Z",
+      "createTime": "2025-07-29T04:23:06.515Z"
+    },
+    {
+      "id": 1753762733399,
+      "player1": {
+        "name": "孙钰涵",
+        "score": 12
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 10
+      },
+      "winner": "孙钰涵",
+      "gameTime": "2025-07-29T04:18:53.399Z",
+      "createTime": "2025-07-29T04:18:53.399Z"
+    },
+    {
+      "id": 1753762490921,
+      "player1": {
+        "name": "石玉",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 8
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-29T04:14:50.921Z",
+      "createTime": "2025-07-29T04:14:50.921Z"
+    },
+    {
+      "id": 1753679205520,
+      "player1": {
+        "name": "李霜琳",
+        "score": 10
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 12
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-28T05:06:45.520Z",
+      "createTime": "2025-07-28T05:06:45.520Z"
+    },
+    {
+      "id": 1753679191238,
+      "player1": {
+        "name": "龙哥",
+        "score": 4
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 11
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-28T05:06:31.238Z",
+      "createTime": "2025-07-28T05:06:31.240Z"
+    },
+    {
+      "id": 1753678724372,
+      "player1": {
+        "name": "李霜琳",
+        "score": 12
+      },
+      "player2": {
+        "name": "CSU王楚钦",
+        "score": 14
+      },
+      "winner": "CSU王楚钦",
+      "gameTime": "2025-07-28T04:58:44.372Z",
+      "createTime": "2025-07-28T04:58:44.373Z"
+    },
+    {
+      "id": 1753678466622,
+      "player1": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 4
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-07-28T04:54:26.622Z",
+      "createTime": "2025-07-28T04:54:26.623Z"
+    },
+    {
+      "id": 1753678289027,
+      "player1": {
+        "name": "CSU王楚钦",
+        "score": 8
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 11
+      },
+      "winner": "龙哥",
+      "gameTime": "2025-07-28T04:51:29.027Z",
+      "createTime": "2025-07-28T04:51:29.029Z"
+    },
+    {
+      "id": 1753678020586,
+      "player1": {
+        "name": "石玉",
+        "score": 11
+      },
+      "player2": {
+        "name": "李霜琳",
+        "score": 8
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-28T04:47:00.586Z",
+      "createTime": "2025-07-28T04:47:00.586Z"
+    },
+    {
+      "id": 1753677837660,
+      "player1": {
+        "name": "石玉",
+        "score": 11
+      },
+      "player2": {
+        "name": "CSU王楚钦",
+        "score": 3
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-28T04:43:57.660Z",
+      "createTime": "2025-07-28T04:43:57.660Z"
+    },
+    {
+      "id": 1753677570541,
+      "player1": {
+        "name": "石玉",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 9
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-28T04:39:30.541Z",
+      "createTime": "2025-07-28T04:39:30.541Z"
+    },
+    {
+      "id": 1753677118800,
+      "player1": {
+        "name": "李霜琳",
+        "score": 8
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 11
+      },
+      "winner": "龙哥",
+      "gameTime": "2025-07-28T04:31:58.801Z",
+      "createTime": "2025-07-28T04:31:58.801Z"
+    },
+    {
+      "id": 1753676908613,
+      "player1": {
+        "name": "CSU王楚钦",
+        "score": 4
+      },
+      "player2": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-07-28T04:28:28.613Z",
+      "createTime": "2025-07-28T04:28:28.613Z"
+    },
+    {
+      "id": 1753676705576,
+      "player1": {
+        "name": "CSU王楚钦",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 6
+      },
+      "winner": "CSU王楚钦",
+      "gameTime": "2025-07-28T04:25:05.576Z",
+      "createTime": "2025-07-28T04:25:05.576Z"
+    },
+    {
+      "id": 1753676199710,
+      "player1": {
+        "name": "石玉",
+        "score": 11
+      },
+      "player2": {
+        "name": "CSU王楚钦",
+        "score": 4
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-28T04:16:39.710Z",
+      "createTime": "2025-07-28T04:16:39.710Z"
+    },
+    {
+      "id": 1753676127426,
+      "player1": {
+        "name": "石玉",
+        "score": 11
+      },
+      "player2": {
+        "name": "李霜琳",
+        "score": 4
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-28T04:15:27.426Z",
+      "createTime": "2025-07-28T04:15:27.426Z"
+    },
+    {
+      "id": 1753675817346,
+      "player1": {
+        "name": "龙哥",
+        "score": 6
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 11
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-28T04:10:17.346Z",
+      "createTime": "2025-07-28T04:10:17.346Z"
+    },
+    {
+      "id": 1753419736945,
+      "player1": {
+        "name": "CSU王楚钦",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 7
+      },
+      "winner": "CSU王楚钦",
+      "gameTime": "2025-07-25T05:02:16.945Z",
+      "createTime": "2025-07-25T05:02:16.945Z"
+    },
+    {
+      "id": 1753419483945,
+      "player1": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 9
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-07-25T04:58:03.945Z",
+      "createTime": "2025-07-25T04:58:03.945Z"
+    },
+    {
+      "id": 1753419280379,
+      "player1": {
+        "name": "奥迪",
+        "score": 14
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 12
+      },
+      "winner": "奥迪",
+      "gameTime": "2025-07-25T04:54:40.379Z",
+      "createTime": "2025-07-25T04:54:40.379Z"
+    },
+    {
+      "id": 1753418803848,
+      "player1": {
+        "name": "CSU王楚钦",
+        "score": 13
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 11
+      },
+      "winner": "CSU王楚钦",
+      "gameTime": "2025-07-25T04:46:43.849Z",
+      "createTime": "2025-07-25T04:46:43.849Z"
+    },
+    {
+      "id": 1753418543188,
+      "player1": {
+        "name": "奥迪",
+        "score": 7
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 11
+      },
+      "winner": "孙钰涵",
+      "gameTime": "2025-07-25T04:42:23.188Z",
+      "createTime": "2025-07-25T04:42:23.189Z"
+    },
+    {
+      "id": 1753418389011,
+      "player1": {
+        "name": "CSU王楚钦",
+        "score": 11
+      },
+      "player2": {
+        "name": "奥迪",
+        "score": 13
+      },
+      "winner": "奥迪",
+      "gameTime": "2025-07-25T04:39:49.011Z",
+      "createTime": "2025-07-25T04:39:49.011Z"
+    },
+    {
+      "id": 1753418027944,
+      "player1": {
+        "name": "龙哥",
+        "score": 9
+      },
+      "player2": {
+        "name": "CSU王楚钦",
+        "score": 11
+      },
+      "winner": "CSU王楚钦",
+      "gameTime": "2025-07-25T04:33:47.944Z",
+      "createTime": "2025-07-25T04:33:47.944Z"
+    },
+    {
+      "id": 1753417694841,
+      "player1": {
+        "name": "龙哥",
+        "score": 12
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 10
+      },
+      "winner": "龙哥",
+      "gameTime": "2025-07-25T04:28:14.841Z",
+      "createTime": "2025-07-25T04:28:14.842Z"
+    },
+    {
+      "id": 1753417519251,
+      "player1": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 3
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-07-25T04:25:19.251Z",
+      "createTime": "2025-07-25T04:25:19.251Z"
+    },
+    {
+      "id": 1753417343519,
+      "player1": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "player2": {
+        "name": "CSU王楚钦",
+        "score": 2
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-07-25T04:22:23.519Z",
+      "createTime": "2025-07-25T04:22:23.519Z"
+    },
+    {
+      "id": 1753417120207,
+      "player1": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 6
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-07-25T04:18:40.207Z",
+      "createTime": "2025-07-25T04:18:40.207Z"
+    },
+    {
+      "id": 1753416936375,
+      "player1": {
+        "name": "李霜琳",
+        "score": 13
+      },
+      "player2": {
+        "name": "奥迪",
+        "score": 11
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-07-25T04:15:36.375Z",
+      "createTime": "2025-07-25T04:15:36.375Z"
+    },
+    {
+      "id": 1753416691175,
+      "player1": {
+        "name": "奥迪",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 5
+      },
+      "winner": "奥迪",
+      "gameTime": "2025-07-25T04:11:31.175Z",
+      "createTime": "2025-07-25T04:11:31.175Z"
+    },
+    {
+      "id": 1753333142675,
+      "player1": {
+        "name": "龙哥",
+        "score": 6
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 11
+      },
+      "winner": "孙钰涵",
+      "gameTime": "2025-07-24T04:59:02.675Z",
+      "createTime": "2025-07-24T04:59:02.675Z"
+    },
+    {
+      "id": 1753332297901,
+      "player1": {
+        "name": "奥迪",
+        "score": 12
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 10
+      },
+      "winner": "奥迪",
+      "gameTime": "2025-07-24T04:44:57.901Z",
+      "createTime": "2025-07-24T04:44:57.901Z"
+    },
+    {
+      "id": 1753332228502,
+      "player1": {
+        "name": "奥迪",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 9
+      },
+      "winner": "奥迪",
+      "gameTime": "2025-07-24T04:43:48.502Z",
+      "createTime": "2025-07-24T04:43:48.502Z"
+    },
+    {
+      "id": 1753331975858,
+      "player1": {
+        "name": "孙钰涵",
+        "score": 10
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 12
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-24T04:39:35.858Z",
+      "createTime": "2025-07-24T04:39:35.858Z"
+    },
+    {
+      "id": 1753331296047,
+      "player1": {
+        "name": "李霜琳",
+        "score": 10
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 12
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-24T04:28:16.047Z",
+      "createTime": "2025-07-24T04:28:16.047Z"
+    },
+    {
+      "id": 1753331050177,
+      "player1": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 5
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-07-24T04:24:10.177Z",
+      "createTime": "2025-07-24T04:24:10.177Z"
+    },
+    {
+      "id": 1753330863936,
+      "player1": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "player2": {
+        "name": "孙钰涵",
+        "score": 7
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-07-24T04:21:03.936Z",
+      "createTime": "2025-07-24T04:21:03.936Z"
+    },
+    {
+      "id": 1753330632792,
+      "player1": {
+        "name": "奥迪",
+        "score": 2
+      },
+      "player2": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-07-24T04:17:12.792Z",
+      "createTime": "2025-07-24T04:17:12.792Z"
+    },
+    {
+      "id": 1753330520208,
+      "player1": {
+        "name": "奥迪",
+        "score": 11
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 7
+      },
+      "winner": "奥迪",
+      "gameTime": "2025-07-24T04:15:20.208Z",
+      "createTime": "2025-07-24T04:15:20.209Z"
+    },
+    {
+      "id": 1753330161588,
+      "player1": {
+        "name": "龙哥",
+        "score": 12
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 14
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-24T04:09:21.588Z",
+      "createTime": "2025-07-24T04:09:21.588Z"
+    },
+    {
+      "id": 1753247259481,
+      "player1": {
+        "name": "李霜琳",
+        "score": 9
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 11
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-23T05:07:39.481Z",
+      "createTime": "2025-07-23T05:07:39.481Z"
+    },
+    {
+      "id": 1753247119820,
+      "player1": {
+        "name": "奥迪",
+        "score": 6
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 11
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-23T05:05:19.820Z",
+      "createTime": "2025-07-23T05:05:19.820Z"
+    },
+    {
+      "id": 1753247108299,
+      "player1": {
+        "name": "CSU王楚钦",
+        "score": 9
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 11
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-23T05:05:08.299Z",
+      "createTime": "2025-07-23T05:05:08.299Z"
+    },
+    {
+      "id": 1753246530196,
+      "player1": {
+        "name": "龙哥",
+        "score": 5
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 11
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-23T04:55:30.196Z",
+      "createTime": "2025-07-23T04:55:30.196Z"
+    },
+    {
+      "id": 1753246268153,
+      "player1": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "player2": {
+        "name": "奥迪",
+        "score": 6
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-07-23T04:51:08.153Z",
+      "createTime": "2025-07-23T04:51:08.153Z"
+    },
+    {
+      "id": 1753246261251,
+      "player1": {
+        "name": "李霜琳",
+        "score": 11
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 9
+      },
+      "winner": "李霜琳",
+      "gameTime": "2025-07-23T04:51:01.252Z",
+      "createTime": "2025-07-23T04:51:01.252Z"
+    },
+    {
+      "id": 1753245924597,
+      "player1": {
+        "name": "CSU王楚钦",
+        "score": 11
+      },
+      "player2": {
+        "name": "李霜琳",
+        "score": 8
+      },
+      "winner": "CSU王楚钦",
+      "gameTime": "2025-07-23T04:45:24.597Z",
+      "createTime": "2025-07-23T04:45:24.597Z"
+    },
+    {
+      "id": 1753245583785,
+      "player1": {
+        "name": "石玉",
+        "score": 12
+      },
+      "player2": {
+        "name": "李霜琳",
+        "score": 10
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-23T04:39:43.785Z",
+      "createTime": "2025-07-23T04:39:43.785Z"
+    },
+    {
+      "id": 1753245386295,
+      "player1": {
+        "name": "奥迪",
+        "score": 11
+      },
+      "player2": {
+        "name": "CSU王楚钦",
+        "score": 9
+      },
+      "winner": "奥迪",
+      "gameTime": "2025-07-23T04:36:26.295Z",
+      "createTime": "2025-07-23T04:36:26.295Z"
+    },
+    {
+      "id": 1753245050095,
+      "player1": {
+        "name": "奥迪",
+        "score": 8
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 11
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-23T04:30:50.095Z",
+      "createTime": "2025-07-23T04:30:50.095Z"
+    },
+    {
+      "id": 1753244771683,
+      "player1": {
+        "name": "石玉",
+        "score": 11
+      },
+      "player2": {
+        "name": "CSU王楚钦",
+        "score": 6
+      },
+      "winner": "石玉",
+      "gameTime": "2025-07-23T04:26:11.683Z",
+      "createTime": "2025-07-23T04:26:11.683Z"
+    },
+    {
+      "id": 1753244453722,
+      "player1": {
+        "name": "奥迪",
+        "score": 7
+      },
+      "player2": {
+        "name": "龙哥",
+        "score": 11
+      },
+      "winner": "龙哥",
+      "gameTime": "2025-07-23T04:20:53.722Z",
+      "createTime": "2025-07-23T04:20:53.722Z"
+    },
+    {
+      "id": 1753244443477,
+      "player1": {
+        "name": "龙哥",
+        "score": 11
+      },
+      "player2": {
+        "name": "CSU王楚钦",
+        "score": 8
+      },
+      "winner": "龙哥",
+      "gameTime": "2025-07-23T04:20:43.477Z",
+      "createTime": "2025-07-23T04:20:43.477Z"
+    },
+    {
+      "id": 1753243733206,
+      "player1": {
+        "name": "龙哥",
+        "score": 13
+      },
+      "player2": {
+        "name": "石玉",
+        "score": 11
+      },
+      "winner": "龙哥",
+      "gameTime": "2025-07-23T04:08:53.206Z",
+      "createTime": "2025-07-23T04:08:53.206Z"
+    }
+  ]
