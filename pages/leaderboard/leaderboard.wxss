@@ -416,12 +416,12 @@
   color: #999;
 }
 
-/* 底部操作 */
-.bottom-actions {
-  padding: 40rpx 0 60rpx;
+/* 中间操作按钮 */
+.middle-actions {
+  padding: 32rpx 0;
   display: flex;
   gap: 20rpx;
-  margin-top: 20rpx;
+  margin: 24rpx 0;
 }
 
 .refresh-btn,

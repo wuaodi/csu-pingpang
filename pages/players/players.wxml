@@ -19,10 +19,12 @@
       <view class="players-list" wx:if="{{players.length > 0}}">
     <view class="player-item" wx:for="{{players}}" wx:key="id">
         <text class="player-name">{{item.name}}</text>
-          <button class="delete-btn" bindtap="deletePlayer" data-id="{{item.id}}" disabled="{{loading}}">
-            <text class="delete-text">删除</text>
+        <view class="player-actions">
+          <button class="stats-btn" bindtap="showPlayerStats" data-id="{{item.id}}" disabled="{{loading}}">
+            <text class="stats-text">交手记录</text>
           </button>
         </view>
+      </view>
       </view>
       
       <view class="empty-state" wx:else>
@@ -60,6 +62,57 @@
       <view class="modal-footer">
         <button class="modal-btn cancel" bindtap="hideAddModal">取消</button>
         <button class="modal-btn confirm" bindtap="addPlayer" disabled="{{loading}}">确定</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 交手记录弹窗 -->
+  <view class="modal-overlay stats-modal" wx:if="{{showStatsModal}}" bindtap="hideStatsModal">
+    <view class="stats-modal-container" catchtap="">
+      <view class="stats-modal-header">
+        <text class="stats-modal-title">{{selectedPlayer.name}} 的交手记录</text>
+        <button class="modal-close" bindtap="hideStatsModal">✕</button>
+      </view>
+      <view class="stats-modal-body">
+        <view class="stats-table">
+          <view class="stats-table-header">
+            <view class="stats-header-cell opponent">对手</view>
+            <view class="stats-header-cell">胜率</view>
+            <view class="stats-header-cell">场次</view>
+          </view>
+          <view class="stats-table-body">
+            <view class="stats-table-row" wx:for="{{headToHeadStats}}" wx:key="opponent">
+              <view class="stats-cell opponent">{{item.opponent}}</view>
+              <view class="stats-cell rate {{ item.total === 0 ? 'no-match' : (item.winRate >= 70 ? 'high' : (item.winRate >= 50 ? 'medium' : 'low')) }}">
+                {{item.total === 0 ? '未交手' : item.winRate + '%'}}
+              </view>
+              <view class="stats-cell games">
+                {{item.total === 0 ? '' : item.total + '场'}}
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="stats-summary" wx:if="{{headToHeadStats.length > 0}}">
+          <text class="summary-title">📊 统计说明</text>
+          <view class="legend">
+            <view class="legend-item">
+              <view class="legend-color high"></view>
+              <text class="legend-text">胜率≥70%</text>
+            </view>
+            <view class="legend-item">
+              <view class="legend-color medium"></view>
+              <text class="legend-text">胜率50-70%</text>
+            </view>
+            <view class="legend-item">
+              <view class="legend-color low"></view>
+              <text class="legend-text">胜率&lt;50%</text>
+            </view>
+            <view class="legend-item">
+              <view class="legend-color no-match"></view>
+              <text class="legend-text">未交手</text>
+            </view>
+          </view>
+        </view>
       </view>
     </view>
   </view>

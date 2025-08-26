@@ -5,21 +5,48 @@ Page({
     players: [],
     showModal: false,
     newPlayerName: '',
-    loading: false
+    loading: false,
+    showStatsModal: false,
+    selectedPlayer: null,
+    headToHeadStats: [],
+    games: []
   },
 
   onLoad() {
     this.loadPlayersFromLocal();
+    this.loadGamesData();
   },
 
   onShow() {
     this.loadPlayersFromLocal();
+    this.loadGamesData();
   },
 
   // 从本地加载选手列表
   loadPlayersFromLocal() {
     const players = wx.getStorageSync('players') || [];
     this.setData({ players: players });
+  },
+
+  // 加载比赛数据
+  async loadGamesData() {
+    try {
+      // 先尝试从本地加载
+      let games = wx.getStorageSync('games') || [];
+      
+      // 如果本地没有数据，尝试从远程加载
+      if (games.length === 0) {
+        try {
+          games = await autoSync.loadGamesFromRemote();
+        } catch (error) {
+          console.log('远程加载比赛数据失败，使用本地数据');
+        }
+      }
+      
+      this.setData({ games: games });
+    } catch (error) {
+      console.error('加载比赛数据失败:', error);
+    }
   },
 
   // 从远程加载选手列表（仅在手动刷新时调用）
@@ -114,47 +141,7 @@ Page({
     }
   },
 
-  // 删除选手（直接操作远程）
-  async deletePlayer(e) {
-    const playerId = e.currentTarget.dataset.id;
-    const player = this.data.players.find(p => p.id === playerId);
-    
-    if (!player) return;
 
-    wx.showModal({
-      title: '确认删除',
-      content: `确定要删除选手"${player.name}"吗？`,
-      confirmText: '删除',
-      confirmColor: '#ff4444',
-      success: async (res) => {
-        if (res.confirm) {
-          try {
-            this.setData({ loading: true });
-            
-            // 直接在远程删除选手
-            await autoSync.deletePlayer(playerId);
-            
-            this.setData({ loading: false });
-
-            // 重新从远程加载数据
-            await this.loadPlayersFromRemote();
-
-          wx.showToast({
-            title: '已删除',
-            icon: 'success'
-          });
-          } catch (error) {
-            this.setData({ loading: false });
-            console.error('删除选手失败:', error);
-            wx.showToast({
-              title: '删除失败，请重试',
-              icon: 'none'
-            });
-          }
-        }
-      }
-    });
-  },
 
   // 手动刷新数据
   async onRefresh() {
@@ -164,8 +151,11 @@ Page({
       // 重新计算选手统计
       await autoSync.recalculatePlayerStats();
       
-      // 重新加载数据
-      await this.loadPlayersFromRemote();
+      // 重新加载选手和比赛数据
+      await Promise.all([
+        this.loadPlayersFromRemote(),
+        this.loadGamesData()
+      ]);
       
       wx.hideLoading();
       wx.showToast({
@@ -180,5 +170,74 @@ Page({
         icon: 'none'
       });
     }
+  },
+
+  // 查看选手交手记录
+  showPlayerStats(e) {
+    const playerId = e.currentTarget.dataset.id;
+    const player = this.data.players.find(p => p.id === playerId);
+    
+    if (!player) return;
+
+    const headToHeadStats = this.calculateHeadToHeadStats(player.name);
+    
+    this.setData({
+      showStatsModal: true,
+      selectedPlayer: player,
+      headToHeadStats: headToHeadStats
+    });
+  },
+
+  // 隐藏统计弹窗
+  hideStatsModal() {
+    this.setData({
+      showStatsModal: false,
+      selectedPlayer: null,
+      headToHeadStats: []
+    });
+  },
+
+  // 计算交手记录统计
+  calculateHeadToHeadStats(playerName) {
+    const { games, players } = this.data;
+    const stats = [];
+
+    // 获取所有其他选手
+    const otherPlayers = players.filter(p => p.name !== playerName);
+
+    otherPlayers.forEach(opponent => {
+      // 找出与该对手的所有比赛
+      const matchesAgainstOpponent = games.filter(game => 
+        (game.player1.name === playerName && game.player2.name === opponent.name) ||
+        (game.player1.name === opponent.name && game.player2.name === playerName)
+      );
+
+      if (matchesAgainstOpponent.length > 0) {
+        // 计算胜负记录
+        const wins = matchesAgainstOpponent.filter(game => game.winner === playerName).length;
+        const losses = matchesAgainstOpponent.length - wins;
+        const winRate = (wins / matchesAgainstOpponent.length * 100).toFixed(1);
+
+        stats.push({
+          opponent: opponent.name,
+          wins: wins,
+          losses: losses,
+          total: matchesAgainstOpponent.length,
+          winRate: parseFloat(winRate)
+        });
+      } else {
+        // 未交手
+        stats.push({
+          opponent: opponent.name,
+          wins: 0,
+          losses: 0,
+          total: 0,
+          winRate: 0
+        });
+      }
+    });
+
+    // 按胜率排序（高到低）
+    return stats.sort((a, b) => b.winRate - a.winRate);
   }
 }); 

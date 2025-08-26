@@ -68,6 +68,18 @@
       </view>
     </view>
 
+    <!-- 操作按钮区域 -->
+    <view class="middle-actions">
+      <button class="action-btn refresh-btn" bindtap="manualRefresh">
+        <text class="btn-icon">🔄</text>
+        <text class="btn-text">手动刷新</text>
+      </button>
+      <button class="action-btn export-btn" bindtap="exportData">
+        <text class="btn-icon">📤</text>
+        <text class="btn-text">导出数据</text>
+      </button>
+    </view>
+
     <!-- 比赛记录 -->
     <view class="section">
       <view class="section-header">
@@ -111,16 +123,6 @@
       </view>
     </view>
 
-    <!-- 底部操作 -->
-    <view class="bottom-actions">
-      <button class="action-btn refresh-btn" bindtap="manualRefresh">
-        <text class="btn-icon">🔄</text>
-        <text class="btn-text">手动刷新</text>
-      </button>
-      <button class="action-btn export-btn" bindtap="exportData">
-        <text class="btn-icon">📤</text>
-        <text class="btn-text">导出数据</text>
-      </button>
-    </view>
+
   </view>
 </view> 

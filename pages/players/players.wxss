@@ -131,9 +131,17 @@
   margin-right: 20rpx;
 }
 
-/* 删除按钮 */
-.delete-btn {
-  background: #e74c3c;
+/* 选手操作区域 */
+.player-actions {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  flex-shrink: 0;
+}
+
+/* 交手记录按钮 */
+.stats-btn {
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
   border-radius: 16rpx;
   border: none;
   display: flex;
@@ -142,23 +150,25 @@
   transition: all 0.3s ease;
   flex-shrink: 0;
   padding: 8rpx 16rpx;
-  min-width: 72rpx;
+  min-width: 80rpx;
 }
 
-.delete-btn:active {
-  background: #c0392b;
+.stats-btn:active {
+  background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
   transform: scale(0.95);
 }
 
-.delete-btn:disabled {
+.stats-btn:disabled {
   opacity: 0.5;
 }
 
-.delete-text {
+.stats-text {
   color: white;
   font-size: 24rpx;
   font-weight: 500;
 }
+
+
 
 
 
@@ -370,4 +380,200 @@
   background: #ccc;
   color: #999;
   box-shadow: none;
+}
+
+/* 统计弹窗样式 */
+.stats-modal {
+  z-index: 1100;
+}
+
+.stats-modal-container {
+  width: 90%;
+  max-width: 700rpx;
+  max-height: 80vh;
+  background: white;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 16rpx 48rpx rgba(0,0,0,0.2);
+  animation: slideUp 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.stats-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32rpx 32rpx 24rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.stats-modal-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2rpx 4rpx rgba(0,0,0,0.2);
+}
+
+.stats-modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24rpx;
+}
+
+/* 统计表格样式 */
+.stats-table {
+  background: white;
+  border-radius: 12rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.1);
+  margin-bottom: 24rpx;
+}
+
+.stats-table-header {
+  display: flex;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-bottom: 2rpx solid #dee2e6;
+}
+
+.stats-header-cell {
+  flex: 1;
+  padding: 20rpx 16rpx;
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #495057;
+  text-align: center;
+  border-right: 1rpx solid #dee2e6;
+}
+
+.stats-header-cell:last-child {
+  border-right: none;
+}
+
+.stats-header-cell.opponent {
+  flex: 1.5;
+}
+
+.stats-table-body {
+  background: white;
+}
+
+.stats-table-row {
+  display: flex;
+  border-bottom: 1rpx solid #f1f3f4;
+  transition: background 0.3s ease;
+}
+
+.stats-table-row:hover {
+  background: #f8f9fa;
+}
+
+.stats-table-row:last-child {
+  border-bottom: none;
+}
+
+.stats-cell {
+  flex: 1;
+  padding: 20rpx 16rpx;
+  font-size: 26rpx;
+  color: #333;
+  text-align: center;
+  border-right: 1rpx solid #f1f3f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stats-cell:last-child {
+  border-right: none;
+}
+
+.stats-cell.opponent {
+  flex: 1.5;
+  font-weight: 600;
+  justify-content: flex-start;
+  padding-left: 24rpx;
+}
+
+.stats-cell.rate {
+  font-weight: 600;
+  border-radius: 8rpx;
+  margin: 4rpx;
+}
+
+.stats-cell.rate.high {
+  background: #d4edda;
+  color: #155724;
+}
+
+.stats-cell.rate.medium {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.stats-cell.rate.low {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.stats-cell.rate.no-match {
+  background: #f8f9fa;
+  color: #6c757d;
+}
+
+/* 统计说明 */
+.stats-summary {
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-top: 20rpx;
+}
+
+.summary-title {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #495057;
+  margin-bottom: 16rpx;
+  display: block;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.legend-color {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 4rpx;
+  flex-shrink: 0;
+}
+
+.legend-color.high {
+  background: #d4edda;
+}
+
+.legend-color.medium {
+  background: #fff3cd;
+}
+
+.legend-color.low {
+  background: #f8d7da;
+}
+
+.legend-color.no-match {
+  background: #f8f9fa;
+  border: 1rpx solid #dee2e6;
+}
+
+.legend-text {
+  font-size: 24rpx;
+  color: #6c757d;
 } 
